@@ -3,48 +3,2832 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello World</title>
+    <title>Ryu Minjeong | Modern Organic Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Fonts: Added 'Teko' as requested -->
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=DM+Serif+Display&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&family=Noto+Serif+KR:wght@300;400;500;600&family=Nanum+Pen+Script&family=Gowun+Batang:wght@400;700&family=Gowun+Dodum&family=Song+Myung&family=Marcellus&family=Orbitron:wght@400;500;700&family=Teko:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --bg-color: #FFFEFA; 
+            --nav-bg: rgba(255, 254, 250, 0.95); 
+            --text-main: #2C2C2C;
+            --text-muted: #666666; 
+            --accent-color: #A68A64;
+            --line-color: #E5E2DC;
+            
+            --font-serif: 'DM Serif Display', 'Noto Serif KR', serif;
+            --font-body-serif: 'Noto Serif KR', serif; 
+            --font-sans: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --font-indie: 'Courier Prime', monospace;
+            --font-hand: 'Nanum Pen Script', cursive;
+            --font-lyrical: 'Gowun Batang', serif;
+            --font-typewriter: 'Courier Prime', 'Gowun Batang', serif;
+            --font-artistic: 'Song Myung', serif; 
+            --font-classic-modern: 'Marcellus', serif; 
+            --font-sci-fi: 'Orbitron', sans-serif; 
+            --font-hero: 'Teko', sans-serif; /* Added Teko Variable */
+            
+            --nav-height: 80px; 
+            --transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            overflow-x: hidden;
+            display: block; 
+            min-height: 100vh;
+            padding-top: var(--nav-height);
+            
+            /* Prevent Text Selection Globally */
+            -webkit-user-select: none; /* Safari */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE10+/Edge */
+            user-select: none; /* Standard */
+        }
+
+        /* --- Top Navigation --- */
+        nav {
+            width: 100%;
+            height: var(--nav-height);
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            background-color: var(--nav-bg);
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+            border-bottom: none;
+        }
+
+        .nav-inner {
+            width: 100%;
+            max-width: 1400px;
+            padding: 0 6%;
+            height: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0;
+            padding-left: 0;
+        }
+
+        .brand {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-img {
+            width: 45px; 
+            height: auto; 
+            object-fit: contain;
+            transition: transform 0.5s ease;
+        }
+        
+        .brand:hover .logo-img {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            flex-direction: row; 
+            gap: 3rem; 
+            align-items: center; 
+            margin-top: 0; 
+            padding-left: 0;
+        }
+
+        .nav-item-wrapper {
+            position: relative;
+            display: inline-block;
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-link {
+            font-family: var(--font-mono); 
+            font-size: 0.9rem; 
+            font-weight: 400; 
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-block;
+            position: relative;
+            padding: 5px 0;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--text-main);
+        }
+        
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background-color: var(--accent-color);
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            transform: none;
+            background-color: var(--bg-color);
+            min-width: 180px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border: none;
+            padding: 10px 0;
+            z-index: 1002;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-item-wrapper:hover .dropdown-menu {
+            display: block;
+            opacity: 1;
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+
+        .dropdown-item {
+            display: block;
+            padding: 8px 15px;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: all 0.2s;
+            text-align: left;
+            white-space: nowrap;
+        }
+
+        .dropdown-item:hover {
+            color: var(--accent-color);
+            background-color: rgba(0,0,0,0.02);
+        }
+
+        /* --- Footer --- */
+        .site-footer {
+            width: 100%;
+            padding: 3rem 0;
+            text-align: center;
+            border-top: 1px solid var(--line-color);
+            margin-top: 5rem;
+            font-family: var(--font-indie);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            opacity: 0.8;
+        }
+
+        /* --- Main Content Area --- */
+        main {
+            margin-left: 0;
+            width: 100%;
+            min-height: calc(100vh - var(--nav-height));
+            position: relative;
+        }
+
+        .tab-content {
+            display: none !important;
+            padding: 2rem 6% 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            animation: fadeIn 0.8s ease-out; 
+        }
+
+        .tab-content.active {
+            display: block !important;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* NEW KEYFRAME for centered absolute elements (Fixes the jumping issue) */
+        @keyframes fadeInCentered {
+            from { opacity: 0; transform: translate(-50%, 15px); }
+            to { opacity: 1; transform: translate(-50%, 0); }
+        }
+
+        /* --- Typography --- */
+        .page-header {
+            margin-bottom: 4rem;
+            max-width: 800px;
+            border-bottom: 1px solid var(--line-color);
+            padding-bottom: 2rem;
+            margin-top: 0; 
+        }
+
+        .page-subtitle {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 0.8rem;
+            display: block;
+        }
+
+        .page-title {
+            font-family: var(--font-mono); 
+            font-size: 3rem;
+            line-height: 1.2;
+            font-weight: 400;
+            color: var(--text-main);
+        }
+
+        /* --- Home Tab --- */
+        #home {
+            padding: 0;
+            height: calc(100vh - var(--nav-height)); 
+            width: 100%;
+            display: none;
+        }
+        
+        #home.active {
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .hero-wrap {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--bg-color);
+            overflow: hidden;
+        }
+
+        .hero-img-container {
+            width: 100%;
+            max-width: 1200px; 
+            height: 70vh; 
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin-bottom: 2rem;
+            position: relative;
+            perspective: 1000px; 
+        }
+
+        .hero-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; 
+            transition: transform 0.1s ease-out; 
+            transform-style: preserve-3d;
         }
         
-        .container {
+        /* Updated Artist Name Font to Teko and Aligned Right */
+        .hero-artist-name {
+            font-family: var(--font-hero); /* Changed to Teko */
+            font-size: 3rem; /* Slightly larger for Teko as it's condensed */
+            color: #555555; 
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-top: 1rem;
+            opacity: 0.95;
+            font-weight: 400; 
+            
+            /* Align Right Logic */
+            width: 100%;
+            max-width: 1200px; /* Match image container width */
+            text-align: right;
+        }
+
+        .hero-caption-box {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            text-align: right;
+            color: rgba(0, 0, 0, 0.4); 
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            line-height: 1.6;
+            font-weight: 300;
+            pointer-events: none; 
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.6); 
+        }
+
+        /* --- About Tab Styles --- */
+        .about-section {
+            margin-bottom: 5rem;
+        }
+        
+        .section-label {
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            display: inline-block;
+            font-weight: 500;
+            border-bottom: none; 
+        }
+
+        .statement-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 3rem; 
+            align-items: start;
+        }
+
+        .about-img-container {
+            display: flex;
+            justify-content: flex-start;
+            padding-top: 3rem;
+        }
+
+        .about-img {
+            width: 100%;
+            max-width: 380px; 
+            height: auto;
+            object-fit: cover;
+            background: #f2f0eb;
+            display: block;
+            border-radius: 2px;
+        }
+
+        .about-text {
+            padding-top: 0.5rem;
+        }
+
+        .about-lead {
+            font-family: var(--font-typewriter); 
+            font-size: 1.6rem; 
+            font-weight: 400; 
+            color: var(--text-main);
+            margin-bottom: 2.5rem;
+            line-height: 1.7; 
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--line-color);
+            letter-spacing: 0.02em; 
+        }
+
+        .about-desc p {
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            color: #444;
+            font-weight: 300;
+            font-family: var(--font-body-serif); 
+            line-height: 1.8;
+            word-break: keep-all;
+        }
+        
+        .signature {
+            font-family: var(--font-artistic);
+            font-style: normal;
+            margin-top: 3rem;
+            font-size: 1.5rem;
+            text-align: right;
+        }
+        
+        .signature-img {
+            height: 3rem; 
+            width: auto;
+            display: inline-block;
+        }
+
+        /* Biography & CV Styles */
+        .bio-list {
+            display: block; 
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #E5E2DC;
+            padding-bottom: 1.5rem;
+        }
+        
+        .bio-list:last-child {
+            border-bottom: none;
+        }
+
+        .bio-label {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .bio-content {
+            font-size: 0.95rem;
+            color: var(--text-main);
+            font-family: var(--font-sans); 
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        /* Updated CV Styles */
+        .cv-wrapper {
+            margin-top: 4rem;
+        }
+
+        .cv-category {
+            margin-bottom: 3.5rem;
+        }
+
+        .cv-category-title {
+            font-family: var(--font-mono);
+            font-size: 0.8rem; 
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--line-color);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 500;
+        }
+
+        .cv-item {
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            margin-bottom: 0.6rem;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .cv-year {
+            font-family: var(--font-mono);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .cv-desc {
+            color: #444;
+            font-weight: 300;
+        }
+
+        /* --- Artworks Tab & Filters --- */
+        .filters {
+            margin-bottom: 4rem; 
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center; 
+            align-items: center;
+            border-bottom: none; 
+            gap: 0; 
+        }
+
+        .filter-btn {
+            background: none;
+            border: none;
+            font-family: var(--font-sans);
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #999;
+            cursor: pointer;
+            padding: 0 2rem;
+            transition: var(--transition);
+            font-weight: 400;
+            position: relative;
+        }
+
+        .filter-btn:not(:last-child) {
+            border-right: 1px solid #d4d4d4;
+        }
+
+        .filter-btn:hover {
+            color: var(--text-main);
+        }
+
+        .filter-btn.active {
+            color: var(--text-main);
+            font-weight: 600;
+            opacity: 1;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            transform: none; 
+        }
+
+        /* Series Statement Styles */
+        .series-intro {
+            display: none; 
+            background-color: transparent; 
+            margin-bottom: 2rem;
+            border: none; 
+            overflow: hidden;
+            text-align: center; 
+        }
+        
+        .series-intro.visible {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        .series-header {
+            display: inline-flex; 
+            justify-content: center;
+            align-items: center;
+            padding: 0.5rem 1.5rem;
+            cursor: pointer;
+            background-color: transparent;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+        }
+        
+        .series-header:hover {
+            background-color: transparent;
+            opacity: 0.7;
+        }
+
+        .series-title {
+            font-family: var(--font-sans);
+            font-size: 1.05rem; 
+            font-weight: 400;
+            color: var(--accent-color);
+            margin: 0;
+            letter-spacing: 0.05em;
+        }
+
+        .toggle-icon {
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            color: var(--accent-color);
+            margin-left: 8px;
+        }
+
+        .series-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+            padding: 0 10%; 
+        }
+
+        .series-content.expanded {
+            max-height: 1500px; 
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+            border-top: none;
+        }
+
+        .series-desc {
+            font-family: var(--font-body-serif); 
+            font-size: 0.93rem; 
+            font-weight: 300;
+            color: #555;
+            line-height: 1.9;
+            margin-top: 0;
+            text-align: left; 
+            word-break: keep-all;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* --- Sub Filters (The Book) --- */
+        .sub-filters {
+            display: none;
+            gap: 8rem; 
+            margin-bottom: 5rem;
+            padding-top: 1rem;
+            justify-content: center;
+            border-top: 1px solid var(--line-color); 
+            padding-top: 2rem;
+            width: 100%;
+        }
+        
+        .sub-filters.visible {
+            display: flex;
+            animation: fadeIn 0.5s;
+        }
+
+        /* --- New Hope Filters Structure --- */
+        .hope-filters-container {
+            display: none;
+            justify-content: center;
+            gap: 8rem; /* Matches the requested wide gap */
+            width: 100%;
+            margin-bottom: 6rem; /* Enough space for series buttons below */
+            border-top: 1px solid var(--line-color);
+            padding-top: 2rem;
+            animation: fadeIn 0.5s;
+        }
+        .hope-filters-container.visible {
+            display: flex;
+        }
+
+        .hope-year-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative; 
+        }
+
+        /* Absolute positioning to keep year buttons stable */
+        .series-group {
+            display: none;
+            gap: 2.5rem;
+            margin-top: 1.5rem; 
+            white-space: nowrap;
+            position: absolute;
+            top: 100%; /* Position below year button */
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+        .series-group.visible {
+            display: flex;
+            animation: fadeInCentered 0.5s ease-out forwards; /* Updated animation */
+        }
+
+        .sub-btn {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            background: transparent;
+            border: none; 
+            padding: 0.2rem 0;
+            cursor: pointer;
+            color: var(--text-muted);
+            transition: all 0.3s;
+            position: relative;
+            font-weight: 400;
+        }
+        
+        .sub-btn:hover {
+            color: var(--text-main);
+        }
+
+        .sub-btn.active {
+            color: var(--text-main);
+            font-weight: 500;
+        }
+        
+        .sub-btn.active::after {
+            content: '•';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--accent-color);
+            font-size: 1.2rem;
+        }
+
+        /* --- Gallery Grid --- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 4rem 2rem;
+            align-items: start; 
+        }
+        
+        /* Grouping Header in Grid */
+        .group-header {
+            grid-column: 1 / -1; 
+            font-family: var(--font-lyrical);
+            font-size: 1.8rem;
+            color: var(--text-main);
             text-align: center;
-            padding: 40px;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            margin: 2rem 0 1rem;
+            padding-top: 2rem;
+            border-top: 1px dashed var(--line-color);
+        }
+
+        .series-sub-title {
+            font-family: var(--font-mono);
+            font-size: 1.1rem;
+            color: var(--text-muted); 
+            font-weight: 300; 
+            margin: 1rem 0 3rem; 
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--line-color);
+            display: inline-block;
+            width: 100%;
+        }
+
+        .artwork-item {
+            cursor: pointer;
+            group: hover;
+            display: none; 
+            width: 100%;
         }
         
-        h1 {
-            color: #333;
-            font-size: 3em;
-            margin: 0;
-            animation: fadeIn 1s ease-in;
+        .artwork-item.show {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        .artwork-item.wide {
+            grid-column: 1 / -1; 
+            width: 100%;
         }
         
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
+        /* Image Wrapper Styling */
+        .art-img-wrap {
+            width: 100%;
+            margin-bottom: 0; 
+            background-color: #ffffff; 
+            border: none; 
+            border-radius: 0;
+            overflow: visible; 
+            display: flex;
+            justify-content: center;
+            align-items: center; 
+            padding: 0.8rem; 
+            transition: opacity 0.3s ease;
+        }
+
+        .art-img-wrap.right-half {
+            width: 50% !important;
+            margin-left: auto !important;
+            margin-right: 0 !important;
+        }
+
+        .artwork-item:not(.wide) .art-img-wrap {
+            height: auto; 
+        }
+
+        .artwork-item.wide .art-img-wrap {
+            height: auto;
+            padding: 1rem 0;
+        }
+
+        .art-img-wrap img {
+            width: 100%; 
+            height: auto; 
+            max-width: 100%;
+            object-fit: contain; 
+            transition: transform 0.8s ease;
+            display: block;
+            box-shadow: none; 
+        }
+
+        .artwork-item:hover .art-img-wrap img {
+            transform: scale(1.02);
+        }
+
+        /* SPECIAL ROW LAYOUTS */
+        .special-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px; 
+            width: 100%;
+            align-items: flex-start;
+        }
+        
+        .special-row .row-img-wrap {
+            flex: 1; 
+            background-color: #fff; 
+            cursor: pointer;
+            display: block; 
+        }
+
+        .special-row.dynamic-row {
+            align-items: flex-start; 
+        }
+
+        .special-row.dynamic-row .row-img-wrap {
+            flex: none; 
+            width: auto; 
+            height: auto; 
+            display: block;
+        }
+
+        .special-row.dynamic-row img {
+             width: auto; 
+             height: 100%; 
+             object-fit: contain;
+             display: block;
+        }
+        
+        .special-row .row-img-wrap img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: contain; 
+            transition: transform 0.5s;
+        }
+        
+        .special-row .row-img-wrap:hover img {
+            transform: scale(1.03);
+        }
+        
+        #row-3-4-5 {
+            gap: 10px; 
+        }
+
+        /* --- Auto Resizable Row Logic (for JS calc) --- */
+        .auto-resizable-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 4rem; 
+            margin-bottom: 5rem;
+            width: 100%;
+        }
+        
+        .auto-resizable-row .art-img-wrap {
+            padding: 0; 
+            display: block;
+            height: auto;
+        }
+        
+        .auto-resizable-row img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        /* ------------------------------------------ */
+
+        .tanha-layout {
+            display: flex;
+            gap: 20px;
+            width: 100%;
+        }
+        
+        .tanha-left {
+            flex: 1; 
+        }
+        
+        .tanha-right {
+            flex: 2; 
+            display: flex;
+            gap: 20px;
+        }
+        
+        /* --- Tanha Grid Layout 3-Col --- */
+        .tanha-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 3rem;
+            width: 100%;
+            height: 800px; 
+            align-items: stretch;
+            margin-bottom: 2rem;
+        }
+        
+        .tanha-col-side {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            justify-content: space-between; 
+        }
+        
+        .tanha-col-side .art-img-wrap {
+            height: 100%; 
+            padding: 0;
+            display: flex;
+            align-items: flex-start; 
+            justify-content: center;
+        }
+        
+        .tanha-col-side img {
+            height: 100%; 
+            max-height: 100%;
+            width: 100%;
+            object-fit: cover; 
+            object-position: center;
+        }
+
+        .tanha-col-center {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; 
+            gap: 2rem;
+            height: 100%;
+            padding: 0 6% 140px 6%; 
+        }
+        
+        .tanha-col-center .art-img-wrap {
+            width: 100%; 
+            height: auto; 
+            padding: 0;
+            flex: none; 
+            display: block;
+        }
+        
+        .tanha-col-center img {
+            width: 100%; 
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        /* --------------------------------------- */
+
+        /* Keep Me Layout */
+        .keep-me-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1.6fr;
+            grid-template-rows: 1fr auto; 
+            gap: 0 120px; 
+            width: 100%;
+            align-items: start; 
+        }
+
+        .keep-img-large {
+            grid-column: 1;
+            grid-row: 1;
+            width: 100%;
+            height: 100%; 
+            cursor: pointer;
+            display: flex;
+            align-items: flex-start; 
+        }
+
+        .keep-img-large img {
+            width: 100%;
+            height: 100%; 
+            display: block;
+            object-fit: contain; 
+            object-position: top; 
+            transition: transform 0.3s;
+        }
+        
+        .keep-img-large:hover img {
+            transform: scale(1.02);
+        }
+
+        .keep-me-right-grid {
+            grid-column: 2;
+            grid-row: 1;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 15px 40px; 
+            align-content: space-between; /* Space rows to fill height */
+            height: 100%; 
+        }
+
+        .keep-me-bottom-row {
+            grid-column: 2;
+            grid-row: 2;
+            margin-top: 4rem;
+            display: flex;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .keep-me-right-grid .nested-item {
+            height: auto;
+            cursor: pointer;
+            transition: transform 0.3s;
+            display: flex; 
+            align-items: flex-end; 
+        }
+
+        .keep-me-right-grid .nested-item:nth-child(1),
+        .keep-me-right-grid .nested-item:nth-child(2),
+        .keep-me-right-grid .nested-item:nth-child(3) {
+            align-items: flex-start;
+        }
+        
+        .keep-me-right-grid .nested-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .keep-me-right-grid img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* Pouch Top Grid Layout */
+        .pouch-top-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 5rem;
+            width: 100%;
+            align-items: end; 
+            margin-bottom: 4rem;
+        }
+
+        .pouch-span-2 {
+            grid-column: span 2;
+            width: 100%;
+        }
+
+        .pouch-span-1 {
+            grid-column: span 1;
+            width: 100%;
+        }
+
+        .pouch-top-grid img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .pouch-grid-full {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 5rem; 
+            width: 100%;
+        }
+        
+        .pouch-grid-full .nested-item {
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .pouch-grid-full .nested-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .pouch-grid-full img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Introduction Toggle Styles */
+        .intro-toggle {
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            color: var(--accent-color);
+            font-family: var(--font-mono);
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        .intro-toggle:hover {
+            opacity: 0.8;
+        }
+        .intro-icon {
+            margin-left: 5px;
+            font-weight: bold;
+        }
+        
+        /* UPDATED: intro-text style as requested */
+        .intro-text {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.8s ease-in-out;
+            font-size: 0.9rem;
+            line-height: 1.8; /* Increased line-height as requested (approx 1.1x) */
+            color: #555;
+            white-space: pre-line; 
+            max-width: 800px; /* Reduced width as requested */
+        }
+        
+        .intro-text.open {
+            max-height: 2000px; 
+            margin-top: 1rem;
+            padding-bottom: 2rem;
+        }
+
+        /* Group Exhibition List Styles */
+        .group-ex-list {
+            margin-top: 2rem;
+            border-top: 1px dashed var(--line-color);
+            padding-top: 1.5rem;
+        }
+        .group-ex-title {
+            font-family: var(--font-mono);
+            font-weight: 500;
+            margin-bottom: 1rem;
+            display: block;
+            color: var(--accent-color);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .group-item {
+            display: block;
+            margin-bottom: 0.6rem;
+            font-size: 0.9rem;
+            color: #555;
+            font-family: var(--font-sans);
+            font-weight: 300;
+        }
+        .text-only-body {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 3rem;
+        }
+        .text-only-label {
+            font-family: var(--font-mono);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding-top: 0.3rem;
+        }
+        
+        .event-type {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.3rem;
+            display: block;
+        }
+
+        /* Exhibition Link Style */
+        .event-link {
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            font-family: var(--font-mono);
+            font-size: 0.95rem; /* Matched to intro-toggle size */
+            color: var(--accent-color);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s;
+            font-weight: 500; /* Removed Bold, matched intro-toggle weight */
+        }
+        .event-link:hover {
+            border-bottom-color: var(--accent-color);
+        }
+        
+        .en-font {
+            /* Updated to use Gowun Batang as requested */
+            font-family: var(--font-lyrical);
+        }
+
+        @media (max-width: 900px) {
+            nav {
+                padding: 0;
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+            .nav-inner {
+                padding: 0 1.5rem;
             }
+            nav::after {
+                left: 70px;
+            }
+            
+            .pouch-top-grid {
+                grid-template-columns: repeat(2, 1fr); 
+                gap: 2rem;
+            }
+            .pouch-span-2 {
+                grid-column: 1 / -1; 
+            }
+            .pouch-span-1 {
+                grid-column: span 1;
+            }
+            
+            .pouch-grid-full {
+                gap: 2rem;
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .auto-resizable-row {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            .auto-resizable-row .art-img-wrap {
+                width: 100% !important;
+                height: auto;
+            }
+            
+            .tanha-grid {
+                grid-template-columns: 1fr;
+                height: auto; 
+            }
+            .tanha-col-side, .tanha-col-center {
+                height: auto;
+            }
+            .tanha-col-side img, .tanha-col-center img {
+                height: auto;
+                object-fit: contain;
+            }
+            .tanha-col-center .art-img-wrap {
+                height: auto;
+                max-height: none;
+            }
+            .tanha-col-center {
+                padding: 0;
+            }
+
+            .keep-me-wrapper {
+                grid-template-columns: 1fr; 
+                gap: 1.5rem;
+                align-items: start;
+            }
+            .keep-me-right-grid {
+                grid-template-columns: repeat(2, 1fr); 
+            }
+
+            .text-only-body {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .hero-caption-box { bottom: 1rem; right: 1rem; font-size: 0.7rem; }
+            .hero-img-container { height: 50vh; }
+            
+            /* Responsive fixes for Exhibition */
+            .event-body { grid-template-columns: 1fr; gap: 1.5rem; }
+            .event-poster { max-width: 200px; }
+        }
+
+        /* --- Lightbox Styles --- */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            flex-direction: column; 
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .lightbox.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .lightbox-content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end; 
+            width: fit-content;
+            max-width: 90vw;
+            max-height: 90vh;
+        }
+
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 80vh; 
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        }
+
+        .lightbox-caption {
+            width: 100%;
+            text-align: right; 
+            color: #2C2C2C;
+            margin-top: 0.8rem;
+            font-family: var(--font-sans); 
+            font-size: 0.9rem;
+            font-weight: 300;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            color: #555;
+            font-size: 3.5rem; /* Clean, modern size */
+            cursor: pointer;
+            font-family: sans-serif; /* Changed to Sans-serif for modern X */
+            font-weight: 300; /* Thin weight */
+            transition: color 0.3s;
+            line-height: 1;
+        }
+
+        .lightbox-close:hover {
+            color: var(--accent-color);
+        }
+
+        /* --- Exhibition Tab --- */
+        .timeline {
+            margin-bottom: 6rem;
+        }
+
+        .event {
+            padding-left: 3rem;
+            padding-bottom: 5rem;
+            position: relative;
+            border-left: 1px solid var(--line-color);
+            margin-left: 1rem;
+        }
+        
+        .event::before {
+            content: '';
+            position: absolute;
+            left: -4px;
+            top: 6px;
+            width: 7px;
+            height: 7px;
+            background: var(--text-main);
+            border-radius: 50%;
+        }
+
+        .event-year {
+            font-family: var(--font-indie);
+            font-size: 1.4rem; 
+            color: var(--text-main);
+            margin-bottom: 1.5rem;
+            display: block;
+            font-weight: 400;
+        }
+
+        .event-body {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .event-poster-container {
+            width: 100%;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+            background: #fff;
+            padding: 5px; 
+            border: 1px solid #E5E2DC;
+        }
+
+        .event-poster-container:hover {
+            transform: translateY(-3px);
+        }
+
+        .event-poster {
+            width: 100%;
+            height: auto; 
+            display: block;
+        }
+
+        .poster-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(255, 255, 255, 0.8);
+            color: var(--text-main);
+            font-family: var(--font-mono); /* Changed */
+            font-size: 0.85rem; /* Changed */
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-weight: 400; /* Adjusted for mono */
+            letter-spacing: 0.05em; /* Optional polish */
+        }
+
+        .event-poster-container:hover .poster-overlay {
+            opacity: 1;
+        }
+
+        /* Updated Font for Exhibition Titles */
+        .event-title {
+            font-family: var(--font-typewriter); 
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            font-weight: 400; 
+        }
+
+        .event-loc {
+            font-size: 0.95rem;
+            color: var(--text-main);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: var(--font-sans);
+            font-weight: 400;
+        }
+        
+        .event-loc span {
+            font-family: var(--font-sans); 
+        }
+
+        /* UPDATED: Decreased max-width to 800px from 900px */
+        .event-desc {
+            font-size: 1rem;
+            color: #555;
+            max-width: 800px; /* Reduced from 900px */
+            font-weight: 300;
+            line-height: 1.7;
+            font-family: var(--font-body-serif);
+        }
+
+        .event-gallery {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+            margin-top: 0;
+            grid-column: 1 / -1; 
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr; 
+            gap: 2rem;
+        }
+
+        .event-gallery.open {
+            max-height: 1200px; 
+            opacity: 1;
+            margin-top: 3rem;
+        }
+
+        .ex-view-img {
+            width: 100%;
+            height: auto; 
+            max-height: 900px; 
+            object-fit: contain; 
+            background: #f2f0eb;
+            border: 1px solid #E5E2DC;
+            padding: 5px;
+            display: block;
+        }
+
+        /* --- Contact --- */
+        .contact-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-row {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .contact-label {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .contact-value {
+            /* Updated: Changed to Gowun Batang (Lyrical Serif) */
+            font-family: var(--font-lyrical);
+            /* Updated: Adjusted size and weight for new font */
+            font-size: 1.7rem; /* Slightly reduced */
+            font-weight: 400;
+            color: var(--text-main);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .contact-value:hover {
+            color: var(--accent-color);
+        }
+
+        /* Contact Page specific - Allow Select */
+        #contact {
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+        }
+
+        /* Style for Inquiries text to match Nav bar */
+        .nav-style-text {
+            font-family: var(--font-mono); 
+            font-size: 0.9rem; 
+            font-weight: 400; 
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Hello World! 🌍</h1>
+
+    <!-- Lightbox (Fix: Removed 'Full view' alt text) -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <div class="lightbox-content" onclick="event.stopPropagation()">
+            <img id="lightbox-img" class="lightbox-img" src="" alt="">
+            <div id="lightbox-caption" class="lightbox-caption"></div>
+        </div>
     </div>
+
+    <!-- Top Navigation -->
+    <nav>
+        <div class="nav-inner">
+            <div class="brand-container">
+                <a href="#" class="brand" onclick="showTab('home', event)">
+                    <img src="Image/Main/logo.webp" alt="Ryu Minjeong Logo" class="logo-img">
+                </a>
+            </div>
+            
+            <ul class="nav-links">
+                <li class="nav-item-wrapper">
+                    <a href="#" class="nav-link" onclick="showTab('about', event)" data-tab="about">About</a>
+                    <div class="dropdown-menu">
+                        <a href="#" class="dropdown-item" onclick="showSection('about', 'statement', event)">Statement</a>
+                        <a href="#" class="dropdown-item" onclick="showSection('about', 'biography', event)">Biography</a>
+                    </div>
+                </li>
+                <li class="nav-item-wrapper">
+                    <a href="#" class="nav-link" onclick="showTab('artworks', event)" data-tab="artworks">Artwork</a>
+                    <div class="dropdown-menu">
+                        <a href="#" class="dropdown-item" onclick="showArtworkCategory('the-book', event)">The Book</a>
+                        <a href="#" class="dropdown-item" onclick="showArtworkCategory('hope', event)">The Shape of Hope</a>
+                    </div>
+                </li>
+                <li class="nav-item-wrapper"><a href="#" class="nav-link" onclick="showTab('exhibitions', event)" data-tab="exhibitions">Exhibitions</a></li>
+                <li class="nav-item-wrapper"><a href="#" class="nav-link" onclick="showTab('contact', event)" data-tab="contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        
+        <!-- HOME -->
+        <div id="home" class="tab-content active">
+            <div class="hero-wrap">
+                <div class="hero-img-container" id="hero-img-container">
+                    <img src="Image/Main/main work.webp" alt="Artist Main Work" class="hero-img">
+                    <div class="hero-caption-box">
+                        Beyond,<br>
+                        East Asian pigments on Korean paper,<br>
+                        140x50cmx8,<br>
+                        2025
+                    </div>
+                </div>
+                <div class="hero-artist-name">RYU MINJEONG</div>
+            </div>
+        </div>
+
+        <!-- ABOUT -->
+        <div id="about" class="tab-content">
+            <header class="page-header">
+                <span class="page-subtitle">Statement & Biography</span>
+                <h2 class="page-title">About</h2>
+            </header>
+            
+            <section class="about-section" id="statement">
+                <span class="section-label">Artist Statement</span>
+                
+                <div class="statement-grid">
+                    <div class="about-img-container">
+                        <img src="Image/Main/profile.webp" alt="Artist Portrait" class="about-img">
+                    </div>
+                    <div class="about-text">
+                        <div class="about-lead">
+                            인간의 근원적 열망과 바람을 그리며 삶을 향한 응원과 희망을 노래한다.
+                        </div>
+                        <div class="about-desc">
+                            <p>
+                                현실에 질의하고 상처를 담담히 바라보며 희망을 이야기하려 한다. 시간의 흐름 속에서 마주하는 필멸의 존재들, 그 안에서 피어나는 생의 의지를 포착한다.
+                            </p>
+                            <p>
+                                세상에서 사라져가는 것들 - 누군가는 소중하다고 하지만, 사실은 필요 없고 이 시대에 맞지 않아 사라져가는 것들에 대한 그리움은 작품의 원천이 된다. 속도와 효율이 지배하는 시대에 무용하다고 여겨지는 것들의 존재가치를 재조명한다. 느림의 미학, 쓸모없음의 존엄성을 탐구한다.
+                            </p>
+                            <p>
+                                그중에서도 책은 작업의 중심 매개체다. 지식과 이야기의 저장소인 책은 인류의 기억이 응집된 형태로 시대를 초월하는 대화를 가능하게 한다. 책의 물리적 형태와 그 안에 담긴 무형의 세계는 물질과 비물질, 현실과 상상, 과거와 미래의 경계를 탐구하는 공간이 된다. 책을 통해 인간의 지적 열망과 상상력, 그리고 존재의 본질에 대한 질문을 이어간다.
+                            </p>
+                            <p>
+                                표현에 있어 일상 사물의 변형과 재배치를 통해 초현실적 공간을 구축한다. 익숙한 대상들이 낯선 맥락에 놓일 때 드러나는 존재의 다층적 의미를 탐색한다. 사물의 관습적 용도와 형태를 해체해 새로운 시각적 경험을 선사하고자 한다.
+                            </p>
+                            <p>
+                                전통 재료와 채색 기법을 현대적으로 변용하는 것이 내 작업의 토대다. 또한 불의 속성, 즉 순간적 현존과 휘발성, 자취 없이 사라지는 덧없음을 작품에 도입해 물질의 근본적 변화를 실험한다. 불을 통해 강렬하지만 잠시 존재하다 흔적만 남기고 사라지는 모든 것의 본질을 은유적으로 드러내며 순간의 불가역적 상실감을 작품에 담는다.
+                            </p>
+                            <p>
+                                작업을 통해 나는 과거와 미래, 현실과 이상적 유토피아를 잇는 허브가 되기를 희망한다. 휘발되는 현대성 속에서 지속가능한 의미의 구조를 탐색하는 이 여정은 존재의 리듬을 회복하는 미학적 제안이다.
+                            </p>
+                            <div class="signature">
+                                <img src="Image/Main/Minjeong.webp" alt="Ryu Minjeong" class="signature-img">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Biography & CV -->
+            <section class="about-section" id="biography">
+                <span class="section-label">Biography</span>
+                <div class="bio-list">
+                    <div class="bio-content">
+                        <p>류민정은 대학과 대학원에서 건축공학을 전공한 후 건축구조설계 엔지니어와 IT 엔지니어로 경력을 쌓았다. 
+                        2015년 전향해 전통민화를 통한 회화 작업을 시작했으며 현재는 전통 채색 기법과 재료를 바탕으로 현대적 미감을 더한 작품 활동을 이어가고 있다.</p>
+                        
+                        <p>2017년 일산 NCC 동행 갤러리에서의 초대 개인전을 시작으로 다양한 전시회를 통해 자신의 예술 세계를 선보이고 있다. 
+                        2020년에는 파리 국제예술공동체(Cité internationale des arts)에서 《The Shape of Hope》, 2021년에는 서울 인사아트센터에서 《전설의 바람》으로 초대 개인전을 열었다. 
+                        《The Shape of Hope》 시리즈는 이후 2022년 서울 일백헌 갤러리와 2024년 이탈리아 Gallery Ilbaeckheon에 초대되어 전시되었다.</p>
+                        
+                        <p>2024년에는 제천 올해의 작가전에 선정되어 《We, The Rhythm》을 선보였고, 2025년에는 인사아트센터 내 충북갤러리에서 《책에 바침》을 전시했다.
+                        다양한 그룹 초대전에도 참여했으며 특히 책을 통해 세상을 이야기하는 작품들이 두드러졌다.</p>
+                        
+                        <p>2018년 대갈문화축제 현대민화공모전에서 대상을 수상했으며, 2020년에는 가나 문화예술재단의 후원으로 파리국제예술공동체(Cité internationale des arts)의 가나 아틀리에 레지던시 프로그램에 참여하는 등 지속적인 작업을 이어가고 있다. 
+                        2024년에는 그림책 《모든 순간, 너였어》를 출간하며 작가로서의 활동 영역을 확장했다.</p>
+                    </div>
+                </div>
+
+                <!-- CV SECTION -->
+                <div class="cv-wrapper">
+                    <!-- Solo Exhibitions -->
+                    <div class="cv-category">
+                        <h4 class="cv-category-title">Solo Exhibitions</h4>
+                        <div class="cv-item"><span class="cv-year">2025</span><span class="cv-desc">책에 바침, 충북갤러리(인사아트센터), 서울</span></div>
+                        <div class="cv-item"><span class="cv-year">2024</span><span class="cv-desc">We, The Rhythm, 제천 예술의전당, 제천</span></div>
+                        <div class="cv-item"><span class="cv-year">2024</span><span class="cv-desc">The Shape of Hope, Gallery Ilbaeckheon Italy, Pietrasanta</span></div>
+                        <div class="cv-item"><span class="cv-year">2022</span><span class="cv-desc">The Shape of Hope, 갤러리 일백헌, 서울</span></div>
+                        <div class="cv-item"><span class="cv-year">2020</span><span class="cv-desc">제6회 현대민화공모전 대상특별전 '전설의 바람', 인사아트센터, 서울</span></div>
+                        <div class="cv-item"><span class="cv-year">2020</span><span class="cv-desc">The Shape of Hope, Cité international des arts, Paris</span></div>
+                        <div class="cv-item"><span class="cv-year">2017</span><span class="cv-desc">NCC Gallery 동행 초대 '옛그림전', NCC Gallery 동행, 일산</span></div>
+                    </div>
+
+                    <!-- Group Exhibitions -->
+                    <div class="cv-category">
+                        <h4 class="cv-category-title">Selected Group Exhibitions</h4>
+                         <div class="cv-item"><span class="cv-year">2025</span><span class="cv-desc">민화 오늘의 이야기, 김세중미술관, 서울</span></div>
+                        <div class="cv-item"><span class="cv-year">2025</span><span class="cv-desc">Fantastic K-art, 제주랩소디 민화 : 법고이변, 갤러리 레미콘, 제주</span></div>
+                        <div class="cv-item"><span class="cv-year">2024</span><span class="cv-desc">Again Minhwa, Gallery Ilbaeckheon Italy, Pietrasanta</span></div>
+                        <div class="cv-item"><span class="cv-year">2024</span><span class="cv-desc">예술의 공명, 한중현대작가전, 나무 모던 & 컨템포러리 아트 갤러리, 서울</span></div>
+                        <div class="cv-item"><span class="cv-year">2024</span><span class="cv-desc">한국의 정물화, 책거리, 카자흐스탄 국립중앙박물관, Almaty</span></div>
+                        <div class="cv-item"><span class="cv-year">2024</span><span class="cv-desc">월간민화 10주년. 민화클라이맥스 시리즈2, 갤러리 동연, 서울</span></div>
+                        <div class="cv-item"><span class="cv-year">2024</span><span class="cv-desc">강릉민화페스타, 강릉아트센터, 강릉</span></div>
+                        <div class="cv-item"><span class="cv-year">2024</span><span class="cv-desc">복 주는 미르전, 갤러리 선, 서울</span></div>
+                        <div class="cv-item"><span class="cv-year">2023</span><span class="cv-desc">한국민화 정예작가전, Gallery Ilbaeckheon Italy, Pietrasanta</span></div>
+                        <div class="cv-item"><span class="cv-year">2023</span><span class="cv-desc">'장생, 건강을 소망하다' 특별전, 허준박물관, 서울</span></div>
+                        <div class="cv-item"><span class="cv-year">2023</span><span class="cv-desc">Fantastic K-art, Gallery Ilbaeckheon Italy, Pietrasanta</span></div>
+                        <div class="cv-item"><span class="cv-year">2023</span><span class="cv-desc">장생도 Today, 동덕아트갤러리, 서울</span></div>
+                        <div class="cv-item"><span class="cv-year">2023</span><span class="cv-desc">책가도전 6인 초대전, 갤러리 숨, 대전</span></div>
+                        <div class="cv-item"><span class="cv-year">2022</span><span class="cv-desc">Chaekgeori: Our shelves Our selves, Welt museum Wien, Wien</span></div>
+                        <div class="cv-item"><span class="cv-year">2021</span><span class="cv-desc">Chaekgeori... de la beauté des livres, Centre Culturel Coreen, Paris</span></div>
+                        <div class="cv-item"><span class="cv-year">2021</span><span class="cv-desc">Le Livre est Plein de Beauté, Nantes Espace International Cosmopolis, Nantes</span></div>
+                        <div class="cv-item"><span class="cv-year">2021</span><span class="cv-desc">한국현대민화 New Power 34, 동덕아트갤러리, 서울</span></div>
+                        <div class="cv-item"><span class="cv-year">2021</span><span class="cv-desc">책에서 피어나는 그림, 책거리, 국립중앙도서관, 서울</span></div>
+                        <div class="cv-item"><span class="cv-year">2020</span><span class="cv-desc">동시대 AI아트 특별전, 금융감독원, 서울</span></div>
+                        <div class="cv-item"><span class="cv-year">2019</span><span class="cv-desc">AI아트갤러리 AIA 프리뷰#2전, AI아트갤러리 AIA, 서울</span></div>
+                        <div class="cv-item"><span class="cv-year">2019</span><span class="cv-desc">책거리 Today, 인당뮤지엄, 대구</span></div>
+                    </div>
+
+                    <!-- Artfair -->
+                    <div class="cv-category">
+                        <h4 class="cv-category-title">Artfair</h4>
+                        <div class="cv-item"><span class="cv-year">2024</span><span class="cv-desc">뱅크아트페어, 무우수갤러리, Pan Pacific Singapore Hotel, Singapore</span></div>
+                        <div class="cv-item"><span class="cv-year">2022</span><span class="cv-desc">브리즈아트페어, 예술의 전당 한가람미술관, 서울</span></div>
+                        <div class="cv-item"><span class="cv-year">2022</span><span class="cv-desc">제4회 대한민국민화아트페어 초대 포토부스 'The Shape of Hope', SETEC, 서울</span></div>
+                    </div>
+
+                    <!-- Project -->
+                    <div class="cv-category">
+                        <h4 class="cv-category-title">Project</h4>
+                        <div class="cv-item"><span class="cv-year">2024</span><span class="cv-desc">제천문화재단 올해의 작가전 작가 선정</span></div>
+                        <div class="cv-item"><span class="cv-year">2023</span><span class="cv-desc">순천국제정원박람회 폐막식 초청장 작화</span></div>
+                        <div class="cv-item"><span class="cv-year">2023</span><span class="cv-desc">세계문화유산축전 백제역사유적지구 별빛마실 그림자극 작화</span></div>
+                        <div class="cv-item"><span class="cv-year">2021</span><span class="cv-desc">청송문화관광재단 상생문화재 사업 '소헌왕후' 영상 작화</span></div>
+                        <div class="cv-item"><span class="cv-year">2021</span><span class="cv-desc">밀양 문화재 야행 홍보 콘텐츠 작화</span></div>
+                         <div class="cv-item"><span class="cv-year">2020</span><span class="cv-desc">밀양 문화재 야행 홍보 콘텐츠 작화</span></div>
+                    </div>
+
+                    <!-- Awards & Residency & Book -->
+                    <div class="cv-category">
+                        <h4 class="cv-category-title">Award (Grant & Prize)</h4>
+                        <div class="cv-item"><span class="cv-year">2024</span><span class="cv-desc">곽재선 문화재단 미르아트공모전 할리스특별상</span></div>
+                        <div class="cv-item"><span class="cv-year">2019</span><span class="cv-desc">한국민화진흥협회 전국민화공모전 장려상</span></div>
+                        <div class="cv-item"><span class="cv-year">2018</span><span class="cv-desc">제6회 대갈문화축제 현대민화공모전 대상</span></div>
+                    </div>
+
+                    <div class="cv-category">
+                        <h4 class="cv-category-title">Residency</h4>
+                        <div class="cv-item"><span class="cv-year">2020</span><span class="cv-desc">파리국제예술공동체(Cité internationale des arts), 가나 아뜰리에(가나문화재단 후원), Paris</span></div>
+                    </div>
+
+                    <div class="cv-category">
+                        <h4 class="cv-category-title">Book</h4>
+                        <div class="cv-item"><span class="cv-year">2024</span><span class="cv-desc">그림책 '모든 순간, 너였어' 출간</span></div>
+                    </div>
+                    
+                    <!-- Possession -->
+                    <div class="cv-category">
+                         <h4 class="cv-category-title">Collections</h4>
+                         <div class="cv-item"><span class="cv-year">2022</span><span class="cv-desc">Sammlung Pohl (Museum), Marburg</span></div>
+                         <div class="cv-item"><span class="cv-year">2019</span><span class="cv-desc">가회민화박물관, 서울</span></div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ARTWORKS -->
+        <div id="artworks" class="tab-content">
+            <header class="page-header">
+                <span class="page-subtitle">Selected Works</span>
+                <h2 class="page-title">Artwork</h2>
+            </header>
+
+            <div class="filters">
+                <button class="filter-btn active" data-cat="the-book" onclick="setCategory('the-book')">The Book</button>
+                <button class="filter-btn" data-cat="hope" onclick="setCategory('hope')">The Shape of Hope</button>
+            </div>
+
+            <!-- Series Statement: The Book -->
+            <div id="intro-the-book" class="series-intro visible">
+                <div class="series-header" onclick="toggleDesc(this)">
+                    <span class="series-title" style="font-family: var(--font-typewriter);">모든 책은 빛이 되어 시간을 건너간다</span>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="series-content">
+                    <div class="series-desc">
+                        <p>우리는 불과 같은 시대를 살아가고 있다. 열정적으로 타오르고 끊임없이 팽창하며 빠르게 소진되어 가는 시대에서 휘발성 지식과 영속하는 지혜에 대해 이야기하고자 한다.</p>
+                        <p>2018년, 나는 디지털 시대의 휘발성 지식에 주목했다. 쉽게 생성되고 빠르게 사라지는 정보의 홍수 속에서 책이라는 매체가 지닌 무게감이 눈에 들어왔다. 그때의 나는 이 대비를 통해 무언가를 말하고 싶었다. 시간이 흐르며 시각도 변화했다. 이제 그 '가벼움'을 더 이상 문제로 보지 않는다. 그것은 우리 시대의 현상이고 그 현상 속에서 어떤 사유와 행동을 살아가야 하는지에 대한 물음을 던지고 있다.</p>
+                        <p>작품에서 전자회로는 책의 형태로 재구성되었다. 디지털 세계를 시각화한 이 '회로책'은 화르르 타오른다. 순식간에 불타고 팽창하며 사라지는 모습은 우리 시대의 축소판이다. 그렇다면 이 불길 뒤에 남는 것은 무엇일까? 작품 속에는 책을 그려 넣었다. 화르르 사라져간 가벼운 정보의 뒤편에 책이 남아있다. 하지만 그것조차도 완전한 답이 되진 않는다. 이 작업은 끊임없는 질문의 여정이다.</p>
+                        <p>서로 다른 종이를 사용해 디지털 세계와 아날로그 세계를 대비시켰다. 처음엔 완전히 다른 차원의 세계로 보였지만, 결국 하나의 판넬 위에서 공존한다. 이는 우리의 복잡한 현실을 반영한다. 작품에는 실제 불의 흔적이 담겨 있다. 이는 단순한 시각적 효과가 아니라, 우리가 살아가는 이 불타는 세상의 실체를 각인한 것이다.</p>
+                        <p>정제된 불의 힘으로 종이의 일부를 소실시킴으로써, 시간과 공간의 층위를 시각화하고자 했다. 이 불꽃 같은 세상은 언젠가 재가 될지도 모른다. 하지만 그 속에서도, 그리고 그 이후에도 남는 것들이 있을 거라 믿는다.</p>
+                        <p>이 작품은 바로 그 남겨진 것들에 대한 이야기다. 불꽃이 스쳐간 자리에 남은 잔상처럼, 우리의 삶과 사유도 어떤 형태로든 흔적을 남기리라 믿는다. 디지털과 아날로그, 휘발성과 영속성, 파괴와 보존. 이 모순된 요소들이 공존하는 우리 시대의 복잡성을 담아내고자 했다.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Series Statement: The Shape of Hope -->
+            <div id="intro-hope" class="series-intro">
+                <div class="series-header" onclick="toggleDesc(this)">
+                    <span class="series-title" style="font-family: var(--font-typewriter);">시대착오적 부적. 인간의 욕망과 화합을 조명하며 삶을 응원하다</span>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="series-content">
+                    <div class="series-desc">
+                        <p>인간 본연의 욕구와 갈망을 바탕으로, 생명의 지속성과 삶의 긍정을 노래한다.</p>
+                        <br>
+                        <p><strong>•  Lucky Pouch 연작</strong></p>
+                        <p>길상화와 벽사화의 의미를 되살려 우리 삶의 순간순간에 축복이 깃들기를 바라는 마음을 담았다. 복주머니라는 오래된 상징은 자연의 섭리와 어우러져 풍요와 생명력이 넘치는 색채로 피어난다. 생명의 지속과 안락과 풍요가 사람들의 삶에 머물기를 바라는 작업으로 자연과 우주에게, 그리고 스스로에게 건네는 진심 어린 바람이다.</p>
+                        <p>다채로운 색이 하나의 조화를 이루는 복주머니들이 가득한 이 작품들은 가능성과 축복이 우리 곁에 항상 머물기를 바라는 마음의 투영이다. 복 주머니 작품 중 ‘Keep me’ 연작은 십이지를 모티브로 한 열두 수호 동물을 그린다.</p>
+                        <p>“나를 지켜줘” 라는 말은 수호동물에게 건네는 부탁이자, 우리가 삶에서 마주하는 고난을 함께 이겨내기 위한 응원이다. 수호영물들이 지키는 이 공간에서 인간과 자연의 공생을 꿈꾸며 위로와 평안이 모두의 삶에 깃들기를 소망한다.</p>
+                        <br>
+                        <p><strong>•  Tanha 연작</strong></p>
+                        <p>인간 존재의 근본적인 열망, 그리고 이를 통해 이루어지는 조화에 대한 이야기이다. ‘Tanha’는 ‘생명의 욕구’를 의미하는 산스크리트어로 인간 심리에 깊이 뿌리박힌 열망과 열정을 상징한다.
+                        각기 다른 욕망들이 충돌하고 융합하며 만들어내는 생명의 몸짓을 시각적 언어로 표현한다. 욕망이라는 원초적 에너지가 빚어내는 생의 춤사위, 그 속에서 피어나는 아름다움의 순간들을 포착하고자 한다.</p>
+                        <br>
+                        <p><strong>• Wishful Pathway</strong></p>
+                        <p>생애주기마다 가장 보편적 기대를 담은 길상 상징물을 각인하듯 그려 넣었다.</p>
+                        <p>생명의 지속과 안락과 풍요가 사람들의 생의 순간순간에 머물기를 바라는 작업이다.</p>
+                        <p>생애주기를 여성의 실루엣으로 표현해 그 선 안에 길상 상징물을 그려 넣었다.</p>
+                        <p>유년기에는 가정의 화목함 안에서 살아갈 염원을 담아 봄꽃을, 청소년기에는 입신양명의 기본을 닦을 학문에 대한 염원을 담아 약리도를 성년기, 장년기에 걸쳐 부귀영화에 대한 염원을 담아 모란도를 죽음을 제대로 인식하게 되는 노년기에는 생명의 영속성의 십장생도를 담아내었다.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sub Filters for THE BOOK -->
+            <div id="sub-the-book" class="sub-filters visible">
+                <button class="sub-btn active" onclick="filterGallery(this, '2025-2023')">2025-2023</button>
+                <button class="sub-btn" onclick="filterGallery(this, '2022-2020')">2022-2020</button>
+            </div>
+
+            <!-- Sub Filters for THE SHAPE OF HOPE (New Structure) -->
+            <div id="hope-filters-wrapper" class="hope-filters-container">
+                <!-- Group 2025-2023 -->
+                <div class="hope-year-group">
+                    <button class="sub-btn" onclick="setHopeYear('2025-2023')">2025-2023</button>
+                    <div id="series-2025" class="series-group">
+                        <button class="sub-btn" onclick="filterHope(this, '2025-2023', 'lucky-pouch')">LUCKY POUCH</button>
+                        <button class="sub-btn" onclick="filterHope(this, '2025-2023', 'tanha')">TANHA</button>
+                    </div>
+                </div>
+
+                <!-- Group 2022-2020 -->
+                <div class="hope-year-group">
+                    <button class="sub-btn" onclick="setHopeYear('2022-2020')">2022-2020</button>
+                    <div id="series-2022" class="series-group">
+                        <button class="sub-btn" onclick="filterHope(this, '2022-2020', 'lucky-pouch')">LUCKY POUCH</button>
+                        <button class="sub-btn" onclick="filterHope(this, '2022-2020', 'wishful')">WISHFUL PATHWAY</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-grid" id="gallery-grid">
+                <!-- ================= THE BOOK ================= -->
+                <!-- 1. Beyond 1 (Wide) -->
+                <div class="artwork-item wide show" data-category="the-book" data-subcategory="2025-2023" onclick="openLightbox('Image/Image/Image_1.webp', 'Beyond, 한지에 동양안료, 디지털 프린팅, 140x70cmx4, 2025')" style="margin-bottom: 3rem;">
+                    <div class="art-img-wrap">
+                        <img src="Image/Image/Image_1.webp" alt="Beyond">
+                    </div>
+                </div>
+                <!-- 2. Beyond 2 (Wide) -->
+                <div class="artwork-item wide show" data-category="the-book" data-subcategory="2025-2023" onclick="openLightbox('Image/Image/Image_2.webp', 'Beyond, 한지에 동양안료, 140x50cmx8, 2025')" style="margin-bottom: 6rem;">
+                    <div class="art-img-wrap">
+                        <img src="Image/Image/Image_2.webp" alt="Beyond">
+                    </div>
+                </div>
+
+                <!-- ADDED ITEMS: Image_3, Image_4, Image_5 (Dynamic Row Layout) -->
+                <div class="artwork-item wide show" data-category="the-book" data-subcategory="2025-2023">
+                    <div class="special-row dynamic-row" id="row-3-4-5">
+                        <div class="row-img-wrap" onclick="openLightbox('Image/Image/Image_3.webp', 'Beyond, 한지에 동양안료, 140x70cmx2, 2025')">
+                            <img src="Image/Image/Image_3.webp" alt="Beyond">
+                        </div>
+                        <div class="row-img-wrap" onclick="openLightbox('Image/Image/Image_4.webp', 'Beyond, 한지에 동양안료, 70x50cmx2, 2024')">
+                            <img src="Image/Image/Image_4.webp" alt="Beyond">
+                        </div>
+                        <div class="row-img-wrap" onclick="openLightbox('Image/Image/Image_5.webp', 'The Book, 한지에 동양안료, 90x50cm, 2024')">
+                            <img src="Image/Image/Image_5.webp" alt="The Book">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Image 7 and Image 6 Row -->
+                <div class="artwork-item wide show" data-category="the-book" data-subcategory="2025-2023" style="margin-bottom: 6rem; margin-top: 4rem;">
+                    <div class="auto-resizable-row">
+                        <!-- Image 7 -->
+                        <div class="art-img-wrap" onclick="openLightbox('Image/Image/Image_7_1.webp', '전설의 바람, 원단에 디지털 프린팅, 가변크기, 2025')">
+                            <img src="Image/Image/Image_7.webp" alt="전설의 바람">
+                        </div>
+                        <!-- Image 6 -->
+                        <div class="art-img-wrap" onclick="openLightbox('Image/Image/Image_6.webp', '책의 길, 한지에 동양안료, 140x65cmx3, 2024')">
+                            <img src="Image/Image/Image_6.webp" alt="책의 길">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Group Heading (Hidden as requested) -->
+                <h3 class="group-header artwork-item" data-category="the-book" data-subcategory="2025-2023-hidden" style="display: none;">세상의 모든 책</h3>
+
+                <!-- Book 1-9 (Standard Grid) -->
+                <div class="artwork-item" data-category="the-book" data-subcategory="2025-2023-hidden" onclick="openLightbox('Image/Book/Book_1.webp', '나의 나니아, 한지에 동양안료, 50x94cm, 2025')">
+                    <div class="art-img-wrap"><img src="Image/Book/Book_1.webp" alt="나의 나니아"></div>
+                </div>
+                <div class="artwork-item" data-category="the-book" data-subcategory="2025-2023-hidden" onclick="openLightbox('Image/Book/Book_2.webp', '이윽고 가닿음, 한지에 동양안료, 50x70cm, 2025')">
+                    <div class="art-img-wrap"><img src="Image/Book/Book_2.webp" alt="이윽고 가닿음"></div>
+                </div>
+                <div class="artwork-item" data-category="the-book" data-subcategory="2025-2023-hidden" onclick="openLightbox('Image/Book/Book_3.webp', '읽는 맛, 한지에 동양안료, 41x60cm, 2025')">
+                    <div class="art-img-wrap"><img src="Image/Book/Book_3.webp" alt="읽는 맛"></div>
+                </div>
+                <div class="artwork-item" data-category="the-book" data-subcategory="2025-2023-hidden" onclick="openLightbox('Image/Book/Book_4.webp', '계절이 내리는 순간, 한지에 동양안료, 50x94cm, 2025')">
+                    <div class="art-img-wrap"><img src="Image/Book/Book_4.webp" alt="계절이 내리는 순간"></div>
+                </div>
+                <div class="artwork-item" data-category="the-book" data-subcategory="2025-2023-hidden" onclick="openLightbox('Image/Book/Book_5.webp', '아낌없이, 한지에 동양안료, 50x70cm, 2025')">
+                    <div class="art-img-wrap"><img src="Image/Book/Book_5.webp" alt="아낌없이"></div>
+                </div>
+                <div class="artwork-item" data-category="the-book" data-subcategory="2025-2023-hidden" onclick="openLightbox('Image/Book/Book_6.webp', '내 모든 이야기, 한지에 동양안료, 41x80cm, 2025')">
+                    <div class="art-img-wrap"><img src="Image/Book/Book_6.webp" alt="내 모든 이야기"></div>
+                </div>
+                <div class="artwork-item" data-category="the-book" data-subcategory="2025-2023-hidden" onclick="openLightbox('Image/Book/Book_7.webp', '활자림, 한지에 동양안료, 50x80cm, 2025')">
+                    <div class="art-img-wrap"><img src="Image/Book/Book_7.webp" alt="활자림"></div>
+                </div>
+                <div class="artwork-item" data-category="the-book" data-subcategory="2025-2023-hidden" onclick="openLightbox('Image/Book/Book_8.webp', '길의 별, 한지에 동양안료, 50x86cm, 2025')">
+                    <div class="art-img-wrap"><img src="Image/Book/Book_8.webp" alt="길의 별"></div>
+                </div>
+                <div class="artwork-item" data-category="the-book" data-subcategory="2025-2023-hidden" onclick="openLightbox('Image/Book/Book_9.webp', 'The Impossible Dream, 한지에 동양안료, 112x145cm, 2025')">
+                    <div class="art-img-wrap"><img src="Image/Book/Book_9.webp" alt="The Impossible Dream"></div>
+                </div>
+
+                <!-- 2022-2020 Items -->
+                <div class="artwork-item wide" data-category="the-book" data-subcategory="2022-2020" onclick="openLightbox('Image/Book/Book_11.webp', 'Bouquinistes de Paris, 한지에 동양안료, 69x35cm, 69x100.5cm, 69x35cm, 2021')">
+                    <div class="art-img-wrap"><img src="Image/Book/Book_11.webp" alt="Bouquinistes de Paris"></div>
+                </div>
+                <div class="artwork-item wide" data-category="the-book" data-subcategory="2022-2020" onclick="openLightbox('Image/Book/Book_12.webp', 'Bouquinistes de Paris, 한지에 동양안료, 60x100cm(상), 68.8x100cm(하), 2020')">
+                    <div class="art-img-wrap right-half"><img src="Image/Book/Book_12.webp" alt="Bouquinistes de Paris"></div>
+                </div>
+                <div class="artwork-item wide" data-category="the-book" data-subcategory="2022-2020" onclick="openLightbox('Image/Book/Book_13.webp', '전설의 바람2.1_서가이야기, 한지에 동양안료, 140x40cmx8, 2020')">
+                    <div class="art-img-wrap"><img src="Image/Book/Book_13.webp" alt="전설의 바람2.1_서가이야기"></div>
+                </div>
+
+                <!-- ================= THE SHAPE OF HOPE (2025-2023) ================= -->
+                
+                <!-- Lucky Pouch: 2025-2023 -->
+                <div class="artwork-item wide show" data-category="hope" data-year="2025-2023" data-subcategory="lucky-pouch">
+                    <div class="auto-resizable-row">
+                        <div class="art-img-wrap" onclick="openLightbox('Image/Lalala/Lalala_1.webp', 'Lalala, 한지에 동양안료, 80.3x116.8cm, 2025')">
+                            <img src="Image/Lalala/Lalala_1.webp" alt="Lalala">
+                        </div>
+                        <div class="art-img-wrap" onclick="openLightbox('Image/Lalala/Lalala_2.webp', 'Going Home, 한지에 동양안료, 80.3x116.8cm, 2025')">
+                            <img src="Image/Lalala/Lalala_2.webp" alt="Going Home">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="artwork-item wide show" data-category="hope" data-year="2025-2023" data-subcategory="lucky-pouch">
+                    <div class="auto-resizable-row">
+                        <div class="art-img-wrap" onclick="openLightbox('Image/Lalala/Lalala_3.webp', 'Lalala, 한지에 동양안료, 50x91cm, 2023')">
+                            <img src="Image/Lalala/Lalala_3.webp" alt="Lalala">
+                        </div>
+                        <div class="art-img-wrap" onclick="openLightbox('Image/Lalala/Lalala_4.webp', '할리스 커피 MD상품으로 제작, 2024')">
+                            <img src="Image/Lalala/Lalala_4.webp" alt="Lalala Detail">
+                        </div>
+                        <div class="art-img-wrap" onclick="openLightbox('Image/Lalala/Lalala_9.webp', 'The Quest, 한지에 동양안료, 53x48cm, 2023')">
+                            <img src="Image/Lalala/Lalala_9.webp" alt="The Quest">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="artwork-item wide show" data-category="hope" data-year="2025-2023" data-subcategory="lucky-pouch">
+                    <div class="auto-resizable-row" style="margin-bottom: 4rem;">
+                        <div class="art-img-wrap" onclick="openLightbox('Image/Lalala/Lalala_5.webp', '복정원, 한지에 동양안료, 65x91cm, 2023')"><img src="Image/Lalala/Lalala_5.webp" alt="복정원"></div>
+                        <div class="art-img-wrap" onclick="openLightbox('Image/Lalala/Lalala_6.webp', '복정원, 한지에 동양안료, 50x70cm, 2024')"><img src="Image/Lalala/Lalala_6.webp" alt="복정원"></div>
+                    </div>
+                </div>
+
+                <div class="artwork-item wide show" data-category="hope" data-year="2025-2023" data-subcategory="lucky-pouch">
+                    <div class="auto-resizable-row" style="margin-bottom: 7rem;">
+                        <div class="art-img-wrap" onclick="openLightbox('Image/Lalala/Lalala_7.webp', '복복점방, 한지에 동양안료, 140x70cmx2, 2025')">
+                            <img src="Image/Lalala/Lalala_7.webp" alt="복복점방">
+                        </div>
+                        <div class="art-img-wrap" onclick="openLightbox('Image/Lalala/Lalala_8.webp', '복복점방, 빈병, 낡은 냉장고, 가변크기, 2025')">
+                            <img src="Image/Lalala/Lalala_8.webp" alt="복복점방">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Keep me Series (2025-2023) -->
+                <div class="artwork-item wide show" data-category="hope" data-year="2025-2023" data-subcategory="lucky-pouch">
+                    <!-- Updated: Changed color to muted and weight to light -->
+                    <h3 class="series-sub-title">KEEP ME</h3>
+                    <div class="keep-me-wrapper">
+                       <div class="keep-img-large" onclick="openLightbox('Image/Keep/Keep_1.webp', 'Keep me, 한지에 동양안료, 80.3x40cm, 2025')">
+                           <img src="Image/Keep/Keep_1.webp" alt="Keep me">
+                       </div>
+
+                       <div class="keep-me-right-grid">
+                           <div class="nested-item" onclick="openLightbox('Image/Keep/Keep_3.webp', 'Keep me, 한지에 동양안료, 30x25cm, 2023')"><img src="Image/Keep/Keep_3.webp" alt="Keep me 1"></div>
+                           <div class="nested-item" onclick="openLightbox('Image/Keep/Keep_4.webp', 'Keep me, 한지에 동양안료, 30x25cm, 2023')"><img src="Image/Keep/Keep_4.webp" alt="Keep me 2"></div>
+                           <div class="nested-item" onclick="openLightbox('Image/Keep/Keep_5.webp', 'Keep me, 한지에 동양안료, 30x25cm, 2023')"><img src="Image/Keep/Keep_5.webp" alt="Keep me 3"></div>
+                           <div class="nested-item" onclick="openLightbox('Image/Keep/Keep_6.webp', 'Keep me, 한지에 동양안료, 30x25cm, 2023')"><img src="Image/Keep/Keep_6.webp" alt="Keep me 4"></div>
+                           <div class="nested-item" onclick="openLightbox('Image/Keep/Keep_7.webp', 'Keep me, 한지에 동양안료, 30x25cm, 2023')"><img src="Image/Keep/Keep_7.webp" alt="Keep me 5"></div>
+                           <div class="nested-item" onclick="openLightbox('Image/Keep/Keep_8.webp', 'Keep me, 한지에 동양안료, 30x25cm, 2023')"><img src="Image/Keep/Keep_8.webp" alt="Keep me 6"></div>
+                           <div class="nested-item" onclick="openLightbox('Image/Keep/Keep_9.webp', 'Keep me, 한지에 동양안료, 30x25cm, 2024')"><img src="Image/Keep/Keep_9.webp" alt="Keep me 7"></div>
+                           <div class="nested-item" onclick="openLightbox('Image/Keep/Keep_10.webp', 'Keep me, 한지에 동양안료, 30x25cm, 2025')"><img src="Image/Keep/Keep_10.webp" alt="Keep me 8"></div>
+                       </div>
+                       
+                       <!-- New Row for Keep 2 and 11 -->
+                       <div class="keep-me-bottom-row auto-resizable-row">
+                           <div class="art-img-wrap" onclick="openLightbox('Image/Keep/Keep_2.webp', 'Keep me;Dragon Magic, 한지에 동양안료, 80x66cm, 2023')">
+                               <img src="Image/Keep/Keep_2.webp" alt="Keep me 2">
+                           </div>
+                           <div class="art-img-wrap" onclick="openLightbox('Image/Keep/Keep_11.webp', 'Keep me, 한지에 동양안료, 64x37cm, 2023')">
+                               <img src="Image/Keep/Keep_11.webp" alt="Keep me 11">
+                           </div>
+                       </div>
+                    </div>
+                </div>
+
+                <!-- Tanha Series: 2025-2023 -->
+                <div class="artwork-item wide" data-category="hope" data-year="2025-2023" data-subcategory="tanha" onclick="openLightbox('Image/Tanha/Tanha_1.webp', 'Tanha, 한지에 동양안료, 150x50cmx4, 2024')">
+                    <div class="art-img-wrap"><img src="Image/Tanha/Tanha_1.webp" alt="Tanha 1"></div>
+                </div>
+                
+                <div class="artwork-item wide" data-category="hope" data-year="2025-2023" data-subcategory="tanha">
+                    <div class="tanha-grid">
+                        <!-- Left Column: Tanha 4 -->
+                        <div class="tanha-col-side">
+                            <div class="art-img-wrap" onclick="openLightbox('Image/Tanha/Tanha_4.webp', 'Tanha; Lift me up, 한지에 동양안료, 140x70cm, 2024')">
+                                <img src="Image/Tanha/Tanha_4.webp" alt="Tanha 4">
+                            </div>
+                        </div>
+                        
+                        <!-- Center Column: Tanha 3 & Tanha 2 -->
+                        <div class="tanha-col-center">
+                            <div class="art-img-wrap" onclick="openLightbox('Image/Tanha/Tanha_3.webp', 'Tanha, 한지에 동양안료, 70x50cm, 2024')">
+                                <img src="Image/Tanha/Tanha_3.webp" alt="Tanha 3">
+                            </div>
+                            <div class="art-img-wrap" onclick="openLightbox('Image/Tanha/Tanha_2.webp', 'Tanha, 한지에 동양안료, 50x70cm, 2024')">
+                                <img src="Image/Tanha/Tanha_2.webp" alt="Tanha 2">
+                            </div>
+                        </div>
+
+                        <!-- Right Column: Tanha 5 -->
+                        <div class="tanha-col-side">
+                            <div class="art-img-wrap" onclick="openLightbox('Image/Tanha/Tanha_5.webp', 'With the moon, 한지에 동양안료, 140x70cm, 2024')">
+                                <img src="Image/Tanha/Tanha_5.webp" alt="With the moon">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ADDED: Tanha 6 & 7 Row -->
+                <div class="artwork-item wide" data-category="hope" data-year="2025-2023" data-subcategory="tanha">
+                    <div class="auto-resizable-row">
+                        <div class="art-img-wrap" onclick="openLightbox('Image/Tanha/Tanha_6.webp', 'Tanha, 2024')">
+                            <img src="Image/Tanha/Tanha_6.webp" alt="Tanha 6">
+                        </div>
+                        <div class="art-img-wrap" onclick="openLightbox('Image/Tanha/Tanha_7.webp', 'Tanha, 2024')">
+                            <img src="Image/Tanha/Tanha_7.webp" alt="Tanha 7">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ================= THE SHAPE OF HOPE (2022-2020) ================= -->
+                
+                <!-- Lucky Pouch: 2022-2020 -->
+                <div class="artwork-item wide show" data-category="hope" data-year="2022-2020" data-subcategory="lucky-pouch">
+                    <!-- Top Section: Grid Based (2022) -->
+                    <div class="pouch-top-grid">
+                        <div class="pouch-span-2" onclick="openLightbox('Image/Pouch/pouch_1.webp', '복드림주머니, 한지에 동양안료, 73x91cm, 2024-2022')">
+                            <img src="Image/Pouch/Pouch_1.webp" alt="복드림주머니">
+                        </div>
+                        <div class="pouch-span-1" onclick="openLightbox('Image/Pouch/pouch_2.webp', '복드림주머니, 한지에 동양안료, 21x28cm, 2022')">
+                            <img src="Image/Pouch/Pouch_2.webp" alt="복드림주머니">
+                        </div>
+                        <div class="pouch-span-1" onclick="openLightbox('Image/Pouch/pouch_3.webp', '복드림주머니, 한지에 동양안료, 21x28cm, 2022')">
+                            <img src="Image/Pouch/Pouch_3.webp" alt="복드림주머니">
+                        </div>
+                    </div>
+
+                    <!-- Bottom Grid Section (2022/2021 + Pouch 10/11 Moved) -->
+                    <div class="pouch-grid-full">
+                        <div class="nested-item" onclick="openLightbox('Image/Pouch/Pouch_4.webp', '충만, 한지에 동양안료, 27x27cm, 2022')"><img src="Image/Pouch/pouch_4.webp" alt="충만"></div>
+                        <div class="nested-item" onclick="openLightbox('Image/Pouch/Pouch_5.webp', 'Dragon Magic, 한지에 동양안료, 27x27cm, 2022')"><img src="Image/Pouch/pouch_5.webp" alt="Dragon Magic"></div>
+                        <div class="nested-item" onclick="openLightbox('Image/Pouch/Pouch_6.webp', '온기, 한지에 동양안료, 27x27cm, 2022')"><img src="Image/Pouch/pouch_6.webp" alt="온기"></div>
+                        <div class="nested-item" onclick="openLightbox('Image/Pouch/Pouch_7.webp', '부의 꽃, 한지에 동양안료, 27x27cm, 2022')"><img src="Image/Pouch/pouch_7.webp" alt="부의 꽃"></div>
+                        <div class="nested-item" onclick="openLightbox('Image/Pouch/Pouch_8.webp', 'Diamond is Power, 한지에 동양안료, 27x27cm, 2022')"><img src="Image/Pouch/pouch_8.webp" alt="Diamond"></div>
+                        <div class="nested-item" onclick="openLightbox('Image/Pouch/Pouch_9.webp', 'Out of Limits, 한지에 동양안료, 27x27cm, 2022')"><img src="Image/Pouch/pouch_9.webp" alt="Out of Limits"></div>
+                        <div class="nested-item" onclick="openLightbox('Image/Pouch/Pouch_10.webp', 'The Quest, 한지에 동양안료, 27x27cm, 2022')"><img src="Image/Pouch/pouch_10.webp" alt="The Quest"></div>
+                        <div class="nested-item" onclick="openLightbox('Image/Pouch/Pouch_11.webp', 'The Quest, 한지에 동양안료, 45x43cm, 2022')"><img src="Image/Pouch/pouch_11.webp" alt="The Quest"></div>
+                    </div>
+                </div>
+
+                <!-- Wishful Pathway (2022-2020) -->
+                <div class="artwork-item wide" data-category="hope" data-year="2022-2020" data-subcategory="wishful" onclick="openLightbox('Image/Hope/hope_1.webp', '아낌없이, 한지에 동양안료, 160x50cmx8, 2020')">
+                    <div class="art-img-wrap"><img src="Image/Hope/hope_1.webp" alt="아낌없이"></div>
+                </div>
+                <div class="artwork-item wide" data-category="hope" data-year="2022-2020" data-subcategory="wishful" onclick="openLightbox('Image/Hope/hope_2.webp', '꽃길을 걷게 해 주오, 한지에 동양안료, 139X53.5, 139X53.5, 139X44.5, 139X50cm, 2022')">
+                    <div class="art-img-wrap"><img src="Image/Hope/hope_2.webp" alt="꽃길을 걷게 해 주오"></div>
+                </div>
+                 <div class="artwork-item wide" data-category="hope" data-year="2022-2020" data-subcategory="wishful" onclick="openLightbox('Image/Hope/hope_3.webp', 'With, 한지에 동양안료, 126X47cmx4, 2022')">
+                    <div class="art-img-wrap"><img src="Image/Hope/hope_3.webp" alt="With"></div>
+                </div>
+
+                <!-- ADDED: Hope 4 & 5 -->
+                <div class="artwork-item wide" data-category="hope" data-year="2022-2020" data-subcategory="wishful">
+                    <div class="auto-resizable-row">
+                        <div class="art-img-wrap" onclick="openLightbox('Image/Hope/hope_4.webp', 'The Shape of Hope, 원단에 디지털 프린팅, 가변크기, 2022.')">
+                            <img src="Image/Hope/hope_4.webp" alt="The Shape of Hope">
+                        </div>
+                        <div class="art-img-wrap" onclick="openLightbox('Image/Hope/hope_5.webp', 'The Shape of Hope, 원단에 디지털 프린팅, 가변크기, 2022.')">
+                            <img src="Image/Hope/hope_5.webp" alt="The Shape of Hope">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- EXHIBITIONS -->
+        <div id="exhibitions" class="tab-content">
+             <header class="page-header">
+                <span class="page-subtitle">Selected Exhibitions</span>
+                <h2 class="page-title">Exhibitions</h2>
+            </header>
+            <div class="timeline">
+                
+                <!-- 2025 -->
+                <div class="event">
+                    <span class="event-year">2025</span>
+                    <div class="event-body">
+                        <div class="event-poster-container" onclick="toggleGallery(this)">
+                            <img src="Image/Poster/poster_1.webp" alt="책에 바침 Poster" class="event-poster">
+                            <div class="poster-overlay">View Gallery</div>
+                        </div>
+                        <div class="event-info">
+                            <span class="event-type">Solo Exhibition</span>
+                            <h3 class="event-title">책에 바침 <span class="en-font">The Book; An Homage</span></h3>
+                            <div class="event-loc">
+                                <span>충북갤러리(인사아트센터)</span>
+                                <span>|</span>
+                                <span>Seoul, Korea</span>
+                            </div>
+                            <a href="https://www.cbartgallery.com/cbart/selectExbiWebView.do?exbiNo=109&key=792&pageUnit=10&pageIndex=2&searchCnd=all&fcltyNo=12&searchExbiSttus=CLOS" target="_blank" class="event-link">Exhibition Detail View</a>
+                            <div class="event-desc">
+                                <!-- Introduction Toggle -->
+                                <div class="intro-toggle" onclick="toggleEventIntro(this)">
+                                    Statement <span class="intro-icon">+</span>
+                                </div>
+                                <div class="intro-text">
+                                    <p>나는 책이 애닳다.
+                                    전자책과 오디오북으로 책을 읽고, 생성형 AI에게 질문을 던져 답을 얻는다. 여기에는 어떤 물리적인 책이 자리하지 않는다.
+                                    페이지를 넘기던 촉감, 책장을 덮을 때 나는 미세한 바람소리, 오래된 책의 그윽함은 추억이 되었다.
+                                    이 전시는 영원히 나에게 남을 흔적인 책들에 보내는 헌사다.</p>
+                                    <p>전시는 세가지의 흐름으로 진행된다.</p>
+                                    <p><strong>세상의 모든 책</strong><br>
+                                    어린 시절부터 책은 나의 안식처이며 나니아 연대기의 옷장이었다.
+                                    책을 통해 상상한 무수한 세계들. 책이 지닌 물리적 형태를 해체하고 재구성해 그것이 담아온 무형의 가치와 의미들을 시각적으로 표현한다.
+                                    한지에 스민 동양안료를 통해 몽환적이고 동화 같은 표현기법으로 양감과 질감을 표현하고자 한다.</p>
+                                    <p><strong>책의 길을 따라</strong><br>
+                                    삶의 여정에서 책을 통해 얻은 과거의 지혜와 미래를 위한 지식이 그 길을 걸어가는 힘이 되길 바라본다.
+                                    순수한 열정으로 신념을 향해 매진하는 이들이 조금은 더 나은 선택과 풍부한 감성을 가질 수 있기를 바라는 마음을 담은 작업이다.
+                                    책을 길의 따라 강렬한 색채로 바라본 세상을 만난다.</p>
+                                    <p><strong>Beyond</strong><br>
+                                    ‘모든 책은 빛이 되어 시간을 건너간다.’
+                                    열정적으로 타오르고 끊임없이 팽창하며 빠르게 소진되어 가는 시대에서 휘발성 지식과 영속하는 지혜에 대해 이야기하고자 한다.
+                                    이 무형의 지식 풍경 속에서는 종이와 잉크의 물성을 지닌 책의 육체가 사라지고 오직 디지털의 입자로 바뀐 그 영혼만이 비물질적 공간에 부유한다.
+                                    책가도와 매화 같은 전통적 소재와 구성 방식을 현대적으로 재해석해 동양과 서양, 전통과 혁신, 아날로그와 디지털 간 경계를 뛰어넘는 시각 언어를 제시한다. 이는 단순히 과거를 회고하는 것이 아닌 현재의 복합적 문화 지형 속에서 한국적 미학을 재발견하고 확장하려는 시도이다.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="event-gallery">
+                            <img src="Image/Gallery/gallery_1.webp" class="ex-view-img" onclick="openLightbox(this.src)">
+                        </div>
+                    </div>
+                    
+                    <div class="group-ex-list">
+                        <span class="group-ex-title">Group Exhibitions</span>
+                        <span class="group-item">Again Minhwa 한국전, 나무 모던&컨템포러리 아트 갤러리, 서울</span>
+                        <span class="group-item">제천 작은미술관 175 개관 전시 Episode. 001 한 배, 제천 작은미술관 175, 제천</span>
+                        <span class="group-item">Fantastic K-art, 제주랩소디 민화 : 법고이변, 갤러리 레미콘, 제주</span>
+                        <span class="group-item">민화 오늘의 이야기, 김세중미술관, 서울</span>
+                    </div>
+                </div>
+                
+                <!-- 2024 -->
+                <div class="event">
+                    <span class="event-year">2024</span>
+                    
+                    <!-- Solo 1 -->
+                    <div class="event-body" style="margin-bottom: 4rem;">
+                        <div class="event-poster-container" onclick="toggleGallery(this)">
+                            <img src="Image/Poster/poster_2.webp" alt="We The Rhythm Poster" class="event-poster">
+                            <div class="poster-overlay">View Gallery</div>
+                        </div>
+                        <div class="event-info">
+                            <span class="event-type">Solo Exhibition</span>
+                            <h3 class="event-title"><span class="en-font">We, The Rhythm</span></h3>
+                            <div class="event-loc">
+                                <span>제천 예술의전당</span>
+                                <span>|</span>
+                                <span>Jecheon, Korea</span>
+                            </div>
+                            <div class="event-desc">
+                                <div class="intro-toggle" onclick="toggleEventIntro(this)">
+                                    Statement <span class="intro-icon">+</span>
+                                </div>
+                                <div class="intro-text">
+                                    <p>인간의 근원적 열망과 바람을 그리며 삶을 향한 응원과 희망을 노래한다.
+                                    현실에 질의하고 상처를 담담히 바라보며 희망을 이야기하려 한다.
+                                    세상에서 사라져가는 것들, 누군가는 소중하다 하지만, 사실은 필요가 없고 이 시대에 맞지 않아 사라져가는 것들에 대한 그리움은 작품의 원천이 된다.
+                                    과거와 미래, 현실과 이상적 유토피아의 세계를 잇는 허브가 되기를 희망한다.</p>
+                                    <p><strong>Part 1</strong><br>
+                                    ‘Tanha’는 인간 존재의 근본적인 열망, 그리고 이를 통해 이루어지는 조화에 대한 이야기이다.
+                                    ‘Tanha’는 ‘생명의 욕구’를 의미하는 산스크리트어로 인간 심리에 깊이 뿌리박힌 열망과 열정을 상징한다.
+                                    육체 안에 갇혀 있던 열망이 세상의 시선과는 상관없다는 듯이 자유로운 몸짓으로 표현되길 바랐다.
+                                    자유의 몸짓, 다양한 욕망의 벡터들이 자유롭게 방사되면서 얽히고설킴을 시각적으로 표현하고자 한다.
+                                    이 작품은 이러한 본질적인 인간의 갈망과 욕망이 개별 자유를 추구하면서도 어떻게 그 안에서 조화를 이루는지를 시각적으로 실현하려 한다.
+                                    새롭게 떠오르는 욕망들을 다양한 신체적 제스처와 연결하여 더욱 강렬한 형태를 만들어내는 과정은 우리 각자 안에 불타오르는 자유와 열정의 춤과 같다.
+                                    이는 개인의 자유와 사회적 조화라는 영원한 명제 사이에서 춤추는 인간 정신을 묘사하려는 시도이다.
+                                    또한 작품 속 모란은 동양 문화에서 전통적으로 부와 명예를 상징하며, 내면의 열망과 열정을 증폭시키는 매개체이다. 개인의 열망과 열정에 보내는 작은 응원의 도구이다.</p>
+                                    <p><strong>Part 2</strong><br>
+                                    ‘복주머니’ 연작은 길상화와 벽사화의 의미를 현대적으로 되짚어본 작업으로 우리 삶의 순간순간에 축복이 깃들기를 바라는 마음을 담았다.
+                                    복주머니라는 오래된 상징은 자연의 섭리와 어우러져 풍요와 생명력이 넘치는 색채로 피어난다.
+                                    생명의 지속과 안락과 풍요가 사람들의 삶에 머물기를 바라는 작업으로 자연과 우주에게, 그리고 스스로에게 건네는 진심 어린 바람이다.
+                                    다채로운 색이 하나의 조화를 이루는 복주머니들이 가득한 이 작품들은 가능성과 축복이 우리 곁에 항상 머물기를 바라는 마음의 투영이다.
+                                    복주머니 작품 중 ‘Keep me’ 연작은 십이지를 모티브로 한 열두 수호 동물을 그린다.
+                                    “나를 지켜줘”라는 말은 수호동물에게 건네는 부탁이자, 우리가 삶에서 마주하는 고난을 함께 이겨내기 위한 응원이다.
+                                    수호 영물들이 지키는 이 공간에서 인간과 자연의 공생을 꿈꾸며 위로와 평안이 모두의 삶에 깃들기를 소망한다.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="event-gallery">
+                            <img src="Image/Gallery/gallery_2.webp" class="ex-view-img" onclick="openLightbox(this.src)">
+                        </div>
+                    </div>
+
+                    <!-- Solo 2 (Italy) -->
+                    <div class="event-body">
+                        <div class="event-poster-container" onclick="toggleGallery(this)">
+                            <img src="Image/Poster/poster_3.webp" alt="Shape of Hope Italy Poster" class="event-poster">
+                            <div class="poster-overlay">View Gallery</div>
+                        </div>
+                        <div class="event-info">
+                            <span class="event-type">Solo Exhibition</span>
+                            <h3 class="event-title"><span class="en-font">The Shape of Hope</span></h3>
+                            <div class="event-loc">
+                                <span>Gallery Ilbaeckheon Italy</span>
+                                <span>|</span>
+                                <span>Pietrasanta, Italy</span>
+                            </div>
+                            <div class="event-desc">
+                                <div class="intro-toggle" onclick="toggleEventIntro(this)">
+                                    Statement <span class="intro-icon">+</span>
+                                </div>
+                                <div class="intro-text">
+                                    <p>I depict stories of the past, pain, longing for hope in the midst of darkness. I strive to confront the harsh reality and portray hope with composure.</p>
+                                    <p>The longing for things that are fading away from the world, although some may deem them precious, stems from the fact that they are unnecessary and incompatible with the present era. This longing becomes the wellspring of my artwork. I believe that the efforts of individuals struggling in a difficult and cold reality, along with tears, bring forth small glimmers of hope in life and in the world.</p>
+                                    <p>Nature, people, books, and all objects serve as my subjects, through which I portray contrasting worlds. I aspire to be a hub that connects the past and the future, the tragic reality and the ideal utopia.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="event-gallery">
+                            <img src="Image/Gallery/gallery_3.webp" class="ex-view-img" onclick="openLightbox(this.src)">
+                        </div>
+                    </div>
+
+                    <!-- Group Exhibitions List -->
+                    <div class="group-ex-list">
+                        <span class="group-ex-title">Group Exhibitions</span>
+                        <span class="group-item">Again Minhwa, Gallery Ilbaeckheon Italy, Pietrasanta</span>
+                        <span class="group-item">예술의 공명, 한중현대작가전, 나무 모던 & 컨템포러리 아트 갤러리, 서울</span>
+                        <span class="group-item">한국의 정물화, 책거리, 카자흐스탄 국립중앙박물관, Almaty</span>
+                        <span class="group-item">월간민화 10주년. 민화클라이맥스 시리즈2, 갤러리 동연, 서울</span>
+                        <span class="group-item">강릉민화페스타, 강릉아트센터, 강릉</span>
+                        <span class="group-item">한국민화 정예작가전 귀국전, 갤러리 일백헌, 서울</span>
+                        <span class="group-item">우주와 달항아리, 갤러리 일백헌, 서울</span>
+                        <span class="group-item">복 주는 미르전, 갤러리 선, 서울</span>
+                    </div>
+                </div>
+
+                <!-- 2023 (Group Only) -->
+                <div class="event">
+                    <span class="event-year">2023</span>
+                    <div class="group-ex-list" style="border-top: none; padding-top: 0; margin-top: 0;">
+                        <span class="group-ex-title">Group Exhibitions</span>
+                        <span class="group-item">한국민화 정예작가전, Gallery Ilbaeckheon Italy, Pietrasanta</span>
+                        <span class="group-item">'장생, 건강을 소망하다' 특별전, 허준박물관, 서울</span>
+                        <span class="group-item">Fantastic K-art, Gallery Ilbaeckheon Italy, Pietrasanta</span>
+                        <span class="group-item">장생도 Today, 동덕아트갤러리, 서울</span>
+                        <span class="group-item">책가도전 6인 초대전, 갤러리 숨, 대전</span>
+                    </div>
+                </div>
+
+                <!-- 2022 -->
+                <div class="event">
+                    <span class="event-year">2022</span>
+                    <div class="event-body">
+                        <div class="event-poster-container" onclick="toggleGallery(this)">
+                            <img src="Image/Poster/poster_4.webp" alt="Shape of Hope Seoul Poster" class="event-poster">
+                            <div class="poster-overlay">View Gallery</div>
+                        </div>
+                        <div class="event-info">
+                            <span class="event-type">Solo Exhibition</span>
+                            <h3 class="event-title"><span class="en-font">The Shape of Hope</span></h3>
+                            <div class="event-loc">
+                                <span>갤러리 일백헌</span>
+                                <span>|</span>
+                                <span>Seoul, Korea</span>
+                            </div>
+                            <div class="event-desc">
+                                <p>서울 갤러리 일백헌 초대 개인전</p>
+                            </div>
+                        </div>
+                        <div class="event-gallery">
+                            <img src="Image/Gallery/gallery_4.webp" class="ex-view-img" onclick="openLightbox(this.src)">
+                        </div>
+                    </div>
+                    <!-- Group List -->
+                    <div class="group-ex-list">
+                        <span class="group-ex-title">Group Exhibitions</span>
+                        <span class="group-item">Chaekgeori: Our shelves Our selves, Welt museum Wien, Wien (2022-2023)</span>
+                    </div>
+                </div>
+
+                <!-- 2021 (Group Only) -->
+                <div class="event">
+                    <span class="event-year">2021</span>
+                    <div class="group-ex-list" style="border-top: none; padding-top: 0; margin-top: 0;">
+                        <span class="group-ex-title">Group Exhibitions</span>
+                        <span class="group-item">Chaekgeori.Bodegón de CoreaCentro, Centro Cultural Coreano, Madrid</span>
+                        <span class="group-item">Chaekgeori... de la beauté des livres, Centre Culturel Coreen, Paris</span>
+                        <span class="group-item">Le Livre est Plein de Beauté, Nantes Espace International Cosmopolis, Nantes</span>
+                        <span class="group-item">한국현대민화 New Power 34, 동덕아트갤러리, 서울</span>
+                        <span class="group-item">책에서 피어나는 그림, 책거리, 국립중앙도서관, 서울</span>
+                    </div>
+                </div>
+
+                <!-- 2020 -->
+                <div class="event">
+                    <span class="event-year">2020</span>
+                    
+                    <!-- Solo 1 -->
+                    <div class="event-body" style="margin-bottom: 4rem;">
+                        <div class="event-poster-container" onclick="toggleGallery(this)">
+                            <img src="Image/Poster/poster_5.webp" alt="전설의 바람 Poster" class="event-poster">
+                            <div class="poster-overlay">View Gallery</div>
+                        </div>
+                        <div class="event-info">
+                            <span class="event-type">Solo Exhibition</span>
+                            <h3 class="event-title">전설의 바람</h3>
+                            <div class="event-loc">
+                                <span>인사아트센터</span>
+                                <span>|</span>
+                                <span>Seoul, Korea</span>
+                            </div>
+                            <div class="event-desc">
+                                <p>제6회 현대민화공모전 대상특별전</p>
+                            </div>
+                        </div>
+                        <div class="event-gallery">
+                            <img src="Image/Gallery/gallery_5.webp" class="ex-view-img" onclick="openLightbox(this.src)">
+                        </div>
+                    </div>
+
+                    <!-- Solo 2 -->
+                    <div class="event-body">
+                        <div class="event-poster-container" style="cursor: default;">
+                            <img src="Image/Poster/poster_6.webp" alt="Paris Exhibition Poster" class="event-poster">
+                        </div>
+                        <div class="event-info">
+                            <span class="event-type">Solo Exhibition</span>
+                            <h3 class="event-title"><span class="en-font">The Shape of Hope</span></h3>
+                            <div class="event-loc">
+                                <span>Cité international des arts</span>
+                                <span>|</span>
+                                <span>Paris, France</span>
+                            </div>
+                            <div class="event-desc">
+                                <p>파리 국제예술공동체 레지던시 오픈 스튜디오</p>
+                            </div>
+                        </div>
+                        <div class="event-gallery">
+                            <img src="Image/Gallery/gallery_6.webp" class="ex-view-img" onclick="openLightbox(this.src)">
+                        </div>
+                    </div>
+
+                    <!-- Group List -->
+                    <div class="group-ex-list">
+                        <span class="group-ex-title">Group Exhibitions</span>
+                        <span class="group-item">현대민화공모전 수상자 초대전 대갈화사전, 가회민화박물관, 서울</span>
+                        <span class="group-item">동시대 AI아트 특별전, 금융감독원, 서울</span>
+                    </div>
+                </div>
+
+                <!-- 2019 (Group Only) -->
+                <div class="event">
+                    <span class="event-year">2019</span>
+                    <div class="group-ex-list" style="border-top: none; padding-top: 0; margin-top: 0;">
+                        <span class="group-ex-title">Group Exhibitions</span>
+                        <span class="group-item">AI아트갤러리 AIA 프리뷰#2전, AI아트갤러리 AIA, 서울</span>
+                        <span class="group-item">책거리 Today, 인당뮤지엄, 대구</span>
+                    </div>
+                </div>
+
+                 <!-- 2017 -->
+                 <div class="event">
+                    <span class="event-year">2017</span>
+                    <div class="event-body">
+                        <div class="event-poster-container" style="cursor: default;">
+                            <img src="Image/Poster/poster_7.webp" alt="옛그림전 Poster" class="event-poster">
+                        </div>
+                        <div class="event-info">
+                            <span class="event-type">Solo Exhibition</span>
+                            <h3 class="event-title">옛그림전</h3>
+                            <div class="event-loc">
+                                <span>NCC Gallery 동행</span>
+                                <span>|</span>
+                                <span>Ilsan, Korea</span>
+                            </div>
+                            <div class="event-desc">
+                                <p></p>
+                            </div>
+                        </div>
+                        <div class="event-gallery">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- CONTACT -->
+        <div id="contact" class="tab-content">
+            <header class="page-header">
+                <span class="page-subtitle">Get in Touch</span>
+                <h2 class="page-title">Contact</h2>
+            </header>
+
+            <div class="contact-wrap">
+                <p style="font-size:1.1rem; color:#555; margin-bottom:2rem;">
+                    <span style="font-family: var(--font-sans); font-weight: 400;">전시·협업 문의</span>
+                    <!-- Applied Nav Style -->
+                    <span class="nav-style-text">| Inquiries for Exhibitions & Collaborations</span>
+                </p>
+                <div class="contact-row">
+                    <span class="contact-label"><i class="fa-regular fa-envelope" style="margin-right: 5px;"></i> Email</span>
+                    <a href="mailto:greeumone@gmail.com" class="contact-value">greeumone@gmail.com</a>
+                </div>
+                <div class="contact-row">
+                    <span class="contact-label"><i class="fa-brands fa-instagram" style="margin-right: 5px;"></i> Instagram</span>
+                    <a href="https://instagram.com/ouje_more" target="_blank" class="contact-value">@ouje_more</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="site-footer">
+            <p>&copy; 2026 Ryu Minjeong. All Rights Reserved.</p>
+        </footer>
+    </main>
+
+    <script>
+        // Tab Navigation Logic
+        function showTab(tabId, event) {
+            if (event) event.preventDefault();
+
+            // Reset all accordions when switching tabs
+            resetAccordions();
+
+            document.querySelectorAll('.tab-content').forEach(el => {
+                el.classList.remove('active');
+                el.style.display = 'none'; 
+            });
+            
+            document.querySelectorAll('.nav-link').forEach(el => el.classList.remove('active'));
+
+            const targetContent = document.getElementById(tabId);
+            if(targetContent) {
+                targetContent.style.display = (tabId === 'home') ? 'flex' : 'block';
+                setTimeout(() => {
+                    targetContent.classList.add('active');
+                }, 10);
+                window.scrollTo(0, 0);
+            }
+
+            const targetLink = document.querySelector(`.nav-link[data-tab="${tabId}"]`);
+            if(targetLink) targetLink.classList.add('active');
+            
+            // Adjust rows on tab switch (delay for rendering)
+            if (tabId === 'artworks') {
+                setTimeout(adjustAllRows, 100);
+            }
+        }
+
+        // Scroll to specific section
+        function showSection(tabId, sectionId, event) {
+            if(event) event.preventDefault();
+            
+            showTab(tabId);
+            
+            setTimeout(() => {
+                const element = document.getElementById(sectionId);
+                if(element) {
+                    const headerOffset = 100;
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth"
+                    });
+                }
+            }, 100);
+        }
+
+        function showArtworkCategory(cat, event) {
+            if(event) event.preventDefault();
+            showTab('artworks');
+            setTimeout(() => {
+                setCategory(cat);
+            }, 50);
+        }
+
+        let currentMainCategory = 'the-book';
+
+        function setCategory(cat) {
+            currentMainCategory = cat; 
+
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                if(btn.dataset.cat === cat) btn.classList.add('active');
+            });
+
+            // Hide all Series Intros
+            document.querySelectorAll('.series-intro').forEach(el => el.classList.remove('visible'));
+            const targetIntro = document.getElementById('intro-' + cat);
+            if(targetIntro) targetIntro.classList.add('visible');
+
+            // --- Updated Filter Logic ---
+            // Hide sub filters by default
+            const subTheBook = document.getElementById('sub-the-book');
+            if(subTheBook) subTheBook.classList.remove('visible');
+            
+            const hopeWrapper = document.getElementById('hope-filters-wrapper');
+            if(hopeWrapper) hopeWrapper.classList.remove('visible');
+
+            if (cat === 'the-book') {
+                if(subTheBook) {
+                    subTheBook.classList.add('visible');
+                    const buttons = subTheBook.querySelectorAll('.sub-btn');
+                    buttons.forEach(b => b.classList.remove('active'));
+                    if(buttons.length > 0) {
+                        buttons[0].classList.add('active');
+                        const firstSubcatFilter = buttons[0].getAttribute('onclick').match(/'([^']+)'\)/)[1];
+                        filterGallery(buttons[0], firstSubcatFilter);
+                    }
+                }
+            } else if (cat === 'hope') {
+                if(hopeWrapper) {
+                    hopeWrapper.classList.add('visible');
+                    // Automatically click the first year button to show its series
+                    const firstYearBtn = hopeWrapper.querySelector('.hope-year-group .sub-btn');
+                    if(firstYearBtn) {
+                         // Extract the year string or simulate click. 
+                         // Since our updated function uses text content searching, we can pass text.
+                         setHopeYear(firstYearBtn.textContent.trim());
+                    }
+                }
+            }
+            setTimeout(adjustAllRows, 100);
+        }
+
+        function filterGallery(btn, subcat) {
+            const parent = btn.parentNode;
+            parent.querySelectorAll('.sub-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            document.querySelectorAll('.artwork-item').forEach(item => {
+                const matchCategory = (item.dataset.category === 'the-book');
+                const matchSubcategory = (item.dataset.subcategory === subcat);
+
+                if (matchCategory && matchSubcategory) {
+                    item.classList.add('show');
+                    if (item.classList.contains('group-header')) {
+                         // Check if hidden by style
+                         if(item.style.display !== 'none') {
+                             item.style.display = 'block';
+                         }
+                    } else {
+                         item.style.display = ''; 
+                    }
+                } else {
+                    item.classList.remove('show');
+                    if (item.classList.contains('group-header')) {
+                         // Keep display none if it was inline style, otherwise just remove show
+                         // Logic handled by class toggle mostly, but for hidden header we rely on !important
+                    }
+                }
+            });
+            setTimeout(adjustAllRows, 100);
+        }
+
+        // Updated function for the new nested structure
+        function setHopeYear(yearStr) {
+            // 1. Deactivate all Year buttons
+            document.querySelectorAll('.hope-year-group > .sub-btn').forEach(b => b.classList.remove('active'));
+            
+            // 2. Find the clicked button and activate
+            const groups = document.querySelectorAll('.hope-year-group');
+            let targetGroup = null;
+
+            groups.forEach(group => {
+                const btn = group.querySelector(':scope > .sub-btn'); 
+                if (btn && btn.textContent.trim() === yearStr) {
+                    btn.classList.add('active');
+                    targetGroup = group;
+                }
+            });
+
+            // 3. Hide all series groups
+            document.querySelectorAll('.series-group').forEach(el => el.classList.remove('visible'));
+
+            // 4. Show the target series group
+            if (targetGroup) {
+                const seriesGroup = targetGroup.querySelector('.series-group');
+                if (seriesGroup) {
+                    seriesGroup.classList.add('visible');
+                    // Click the first button in the series automatically
+                    const firstSeriesBtn = seriesGroup.querySelector('.sub-btn');
+                    if(firstSeriesBtn) firstSeriesBtn.click();
+                }
+            }
+        }
+
+        // Updated function for nested structure filtering
+        function filterHope(btn, year, series) {
+            const parent = btn.closest('.series-group');
+            if(parent) {
+                parent.querySelectorAll('.sub-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            }
+
+            document.querySelectorAll('.artwork-item').forEach(item => {
+                if (item.dataset.category !== 'hope') {
+                    item.classList.remove('show');
+                    if (item.classList.contains('group-header')) {
+                        // handled by style
+                    }
+                    return;
+                }
+
+                const matchYear = (item.dataset.year === year);
+                const matchSeries = (item.dataset.subcategory === series);
+
+                if (matchYear && matchSeries) {
+                    item.classList.add('show');
+                    item.style.display = '';
+                } else {
+                    item.classList.remove('show');
+                }
+            });
+            setTimeout(adjustAllRows, 100);
+        }
+
+        // Updated Accordion Toggle for Series Intro
+        function toggleDesc(header) {
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('.toggle-icon');
+            
+            // Check if it's already expanded
+            const isExpanded = content.classList.contains('expanded');
+
+            // Close all other series intros
+            document.querySelectorAll('.series-content.expanded').forEach(el => {
+                if (el !== content) {
+                    el.classList.remove('expanded');
+                    // Reset icon of sibling
+                    const siblingHeader = el.previousElementSibling;
+                    if(siblingHeader) {
+                        const siblingIcon = siblingHeader.querySelector('.toggle-icon');
+                        if(siblingIcon) siblingIcon.textContent = '+';
+                    }
+                }
+            });
+
+            // Toggle clicked element
+            content.classList.toggle('expanded');
+            icon.textContent = content.classList.contains('expanded') ? '-' : '+';
+        }
+
+        // Updated Accordion Toggle for Exhibitions
+        function toggleEventIntro(header) {
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('.intro-icon');
+
+            // Check if expanded
+            const isExpanded = content.classList.contains('open');
+
+            // Close all other open intro texts
+            document.querySelectorAll('.intro-text.open').forEach(el => {
+                if (el !== content) {
+                    el.classList.remove('open');
+                    const siblingHeader = el.previousElementSibling;
+                    if (siblingHeader && siblingHeader.classList.contains('intro-toggle')) {
+                         const siblingIcon = siblingHeader.querySelector('.intro-icon');
+                         if(siblingIcon) siblingIcon.textContent = '+';
+                    }
+                }
+            });
+            
+            content.classList.toggle('open');
+            icon.textContent = content.classList.contains('open') ? '-' : '+';
+        }
+
+        function toggleGallery(element) {
+            const parent = element.closest('.event-body');
+            const gallery = parent.querySelector('.event-gallery');
+            if (gallery) {
+                // Optional: Close other galleries if needed, but usually kept separate
+                gallery.classList.toggle('open');
+            }
+        }
+
+        // --- NEW: Helper to reset all accordions ---
+        function resetAccordions() {
+            // Close Series Intros
+            document.querySelectorAll('.series-content.expanded').forEach(el => {
+                el.classList.remove('expanded');
+                const header = el.previousElementSibling;
+                if (header) {
+                    const icon = header.querySelector('.toggle-icon');
+                    if (icon) icon.textContent = '+';
+                }
+            });
+
+            // Close Event Intros
+            document.querySelectorAll('.intro-text.open').forEach(el => {
+                el.classList.remove('open');
+                const header = el.previousElementSibling;
+                if (header) {
+                    const icon = header.querySelector('.intro-icon');
+                    if (icon) icon.textContent = '+';
+                }
+            });
+        }
+
+        // --- NEW: Global Click Listener ---
+        document.addEventListener('click', function(e) {
+            // If click target is NOT inside a series-intro or event-desc, close them
+            if (!e.target.closest('.series-intro') && !e.target.closest('.event-desc')) {
+                resetAccordions();
+            }
+        });
+
+        // --- NEW: Disable Right Click on Images ---
+        document.addEventListener('contextmenu', function(e) {
+            if (e.target.tagName === 'IMG') {
+                e.preventDefault();
+            }
+        });
+
+        function openLightbox(src, caption) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const lightboxCaption = document.getElementById('lightbox-caption');
+            
+            lightboxImg.src = src;
+            lightboxCaption.innerHTML = caption || ''; 
+            lightbox.classList.add('active');
+            
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function parallax(event) {
+            const img = document.querySelector('.hero-img');
+            const x = (window.innerWidth - event.pageX * 2) / 90;
+            const y = (window.innerHeight - event.pageY * 2) / 90;
+            if(img) {
+                img.style.transform = `translateX(${x}px) translateY(${y}px)`;
+            }
+        }
+        
+        function adjustAllRows() {
+            adjustRow345();
+            adjustAutoHeightRows();
+        }
+
+        function adjustRow345() {
+            const container = document.getElementById('row-3-4-5');
+            if (!container || container.offsetParent === null) return; 
+
+            if (window.innerWidth <= 900) {
+                resetRowStyles(container);
+                return;
+            }
+            applyRowLayout(container, 100); 
+        }
+
+        function adjustAutoHeightRows() {
+            const rows = document.querySelectorAll('.auto-resizable-row');
+            rows.forEach(row => {
+                if(row.offsetParent === null) return; 
+                if (window.innerWidth <= 900) {
+                    resetRowStyles(row);
+                } else {
+                    applyRowLayout(row, 64); 
+                }
+            });
+        }
+
+        function resetRowStyles(row) {
+            const wrappers = row.querySelectorAll('.art-img-wrap, .row-img-wrap');
+            const images = row.querySelectorAll('img');
+            wrappers.forEach(wrap => {
+                wrap.style.width = '100%';
+                wrap.style.height = 'auto';
+                wrap.style.flex = '';
+            });
+            images.forEach(img => {
+                img.style.width = '100%';
+                img.style.height = 'auto';
+            });
+        }
+
+        function applyRowLayout(container, totalGapPx) {
+            const images = Array.from(container.querySelectorAll('img'));
+            
+            let ready = true;
+            images.forEach(img => {
+                if (!img.naturalHeight || img.naturalHeight === 0) {
+                    ready = false; 
+                }
+            });
+
+            if (!ready) {
+                setTimeout(() => applyRowLayout(container, totalGapPx), 100);
+                return;
+            }
+            
+            images.forEach(img => {
+                const ratio = img.naturalWidth / img.naturalHeight;
+                const wrapper = img.closest('.art-img-wrap') || img.closest('.row-img-wrap');
+                
+                wrapper.style.flex = `${ratio} 1 0%`; 
+                wrapper.style.width = 'auto'; 
+                
+                img.style.width = '100%';
+                img.style.height = 'auto';
+            });
+        }
+
+        setCategory('the-book');
+        showTab('home');
+
+        window.addEventListener('load', adjustAllRows);
+        window.addEventListener('resize', adjustAllRows);
+
+        const homeSection = document.getElementById('home');
+        if (homeSection) {
+            homeSection.addEventListener('mousemove', parallax);
+        }
+    </script>
 </body>
 </html>
