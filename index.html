@@ -30,7 +30,7 @@
             --font-artistic: 'Song Myung', serif; 
             --font-classic-modern: 'Marcellus', serif; 
             --font-sci-fi: 'Orbitron', sans-serif; 
-            --font-hero: 'Teko', sans-serif; /* Added Teko Variable */
+            --font-hero: 'Teko', sans-serif;
             
             --nav-height: 80px; 
             --transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
@@ -53,10 +53,10 @@
             padding-top: var(--nav-height);
             
             /* Prevent Text Selection Globally */
-            -webkit-user-select: none; /* Safari */
-            -moz-user-select: none; /* Firefox */
-            -ms-user-select: none; /* IE10+/Edge */
-            user-select: none; /* Standard */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
 
         /* --- Top Navigation --- */
@@ -73,6 +73,7 @@
             z-index: 1000;
             backdrop-filter: blur(5px);
             border-bottom: none;
+            transition: height 0.3s ease; /* Smooth transition for mobile resize */
         }
 
         .nav-inner {
@@ -233,7 +234,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* NEW KEYFRAME for centered absolute elements (Fixes the jumping issue) */
         @keyframes fadeInCentered {
             from { opacity: 0; transform: translate(-50%, 15px); }
             to { opacity: 1; transform: translate(-50%, 0); }
@@ -312,10 +312,9 @@
             transform-style: preserve-3d;
         }
         
-        /* Updated Artist Name Font to Teko and Aligned Right */
         .hero-artist-name {
-            font-family: var(--font-hero); /* Changed to Teko */
-            font-size: 3rem; /* Slightly larger for Teko as it's condensed */
+            font-family: var(--font-hero);
+            font-size: 3rem; 
             color: #555555; 
             letter-spacing: 0.1em;
             text-transform: uppercase;
@@ -323,9 +322,8 @@
             opacity: 0.95;
             font-weight: 400; 
             
-            /* Align Right Logic */
             width: 100%;
-            max-width: 1200px; /* Match image container width */
+            max-width: 1200px; 
             text-align: right;
         }
 
@@ -631,9 +629,9 @@
         .hope-filters-container {
             display: none;
             justify-content: center;
-            gap: 8rem; /* Matches the requested wide gap */
+            gap: 8rem;
             width: 100%;
-            margin-bottom: 6rem; /* Enough space for series buttons below */
+            margin-bottom: 6rem;
             border-top: 1px solid var(--line-color);
             padding-top: 2rem;
             animation: fadeIn 0.5s;
@@ -649,21 +647,20 @@
             position: relative; 
         }
 
-        /* Absolute positioning to keep year buttons stable */
         .series-group {
             display: none;
             gap: 2.5rem;
             margin-top: 1.5rem; 
             white-space: nowrap;
             position: absolute;
-            top: 100%; /* Position below year button */
+            top: 100%;
             left: 50%;
             transform: translateX(-50%);
             z-index: 10;
         }
         .series-group.visible {
             display: flex;
-            animation: fadeInCentered 0.5s ease-out forwards; /* Updated animation */
+            animation: fadeInCentered 0.5s ease-out forwards;
         }
 
         .sub-btn {
@@ -706,7 +703,6 @@
             align-items: start; 
         }
         
-        /* Grouping Header in Grid */
         .group-header {
             grid-column: 1 / -1; 
             font-family: var(--font-lyrical);
@@ -747,7 +743,6 @@
             width: 100%;
         }
         
-        /* Image Wrapper Styling */
         .art-img-wrap {
             width: 100%;
             margin-bottom: 0; 
@@ -837,8 +832,9 @@
             transform: scale(1.03);
         }
         
+        /* Updated: Increased gap for Web version as requested */
         #row-3-4-5 {
-            gap: 10px; 
+            gap: 40px; 
         }
 
         /* --- Auto Resizable Row Logic (for JS calc) --- */
@@ -862,7 +858,6 @@
             height: auto;
             display: block;
         }
-        /* ------------------------------------------ */
 
         .tanha-layout {
             display: flex;
@@ -937,7 +932,6 @@
             height: auto;
             display: block;
         }
-        /* --------------------------------------- */
 
         /* Keep Me Layout */
         .keep-me-wrapper {
@@ -978,7 +972,7 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr); 
             gap: 15px 40px; 
-            align-content: space-between; /* Space rows to fill height */
+            align-content: space-between; 
             height: 100%; 
         }
 
@@ -1082,16 +1076,15 @@
             font-weight: bold;
         }
         
-        /* UPDATED: intro-text style as requested */
         .intro-text {
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.8s ease-in-out;
             font-size: 0.9rem;
-            line-height: 1.8; /* Increased line-height as requested (approx 1.1x) */
+            line-height: 1.8; 
             color: #555;
             white-space: pre-line; 
-            max-width: 800px; /* Reduced width as requested */
+            max-width: 800px; 
         }
         
         .intro-text.open {
@@ -1153,97 +1146,19 @@
             display: inline-block;
             margin-bottom: 1.5rem;
             font-family: var(--font-mono);
-            font-size: 0.95rem; /* Matched to intro-toggle size */
+            font-size: 0.95rem; 
             color: var(--accent-color);
             text-decoration: none;
             border-bottom: 1px solid transparent;
             transition: border-color 0.3s;
-            font-weight: 500; /* Removed Bold, matched intro-toggle weight */
+            font-weight: 500; 
         }
         .event-link:hover {
             border-bottom-color: var(--accent-color);
         }
         
         .en-font {
-            /* Updated to use Gowun Batang as requested */
             font-family: var(--font-lyrical);
-        }
-
-        @media (max-width: 900px) {
-            nav {
-                padding: 0;
-            }
-            .nav-inner {
-                padding: 0 1.5rem;
-            }
-            nav::after {
-                left: 70px;
-            }
-            
-            .pouch-top-grid {
-                grid-template-columns: repeat(2, 1fr); 
-                gap: 2rem;
-            }
-            .pouch-span-2 {
-                grid-column: 1 / -1; 
-            }
-            .pouch-span-1 {
-                grid-column: span 1;
-            }
-            
-            .pouch-grid-full {
-                gap: 2rem;
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .auto-resizable-row {
-                flex-direction: column;
-                gap: 2rem;
-            }
-            .auto-resizable-row .art-img-wrap {
-                width: 100% !important;
-                height: auto;
-            }
-            
-            .tanha-grid {
-                grid-template-columns: 1fr;
-                height: auto; 
-            }
-            .tanha-col-side, .tanha-col-center {
-                height: auto;
-            }
-            .tanha-col-side img, .tanha-col-center img {
-                height: auto;
-                object-fit: contain;
-            }
-            .tanha-col-center .art-img-wrap {
-                height: auto;
-                max-height: none;
-            }
-            .tanha-col-center {
-                padding: 0;
-            }
-
-            .keep-me-wrapper {
-                grid-template-columns: 1fr; 
-                gap: 1.5rem;
-                align-items: start;
-            }
-            .keep-me-right-grid {
-                grid-template-columns: repeat(2, 1fr); 
-            }
-
-            .text-only-body {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
-
-            .hero-caption-box { bottom: 1rem; right: 1rem; font-size: 0.7rem; }
-            .hero-img-container { height: 50vh; }
-            
-            /* Responsive fixes for Exhibition */
-            .event-body { grid-template-columns: 1fr; gap: 1.5rem; }
-            .event-poster { max-width: 200px; }
         }
 
         /* --- Lightbox Styles --- */
@@ -1302,10 +1217,11 @@
             top: 2rem;
             right: 2rem;
             color: #555;
-            font-size: 3.5rem; /* Clean, modern size */
+            /* Updated: Reduced size by approx 50% */
+            font-size: 2rem; 
             cursor: pointer;
-            font-family: sans-serif; /* Changed to Sans-serif for modern X */
-            font-weight: 300; /* Thin weight */
+            font-family: sans-serif; 
+            font-weight: 300; 
             transition: color 0.3s;
             line-height: 1;
         }
@@ -1384,20 +1300,19 @@
             padding: 0.8rem;
             background: rgba(255, 255, 255, 0.8);
             color: var(--text-main);
-            font-family: var(--font-mono); /* Changed */
-            font-size: 0.85rem; /* Changed */
+            font-family: var(--font-mono); 
+            font-size: 0.85rem; 
             text-align: center;
             opacity: 0;
             transition: opacity 0.3s;
-            font-weight: 400; /* Adjusted for mono */
-            letter-spacing: 0.05em; /* Optional polish */
+            font-weight: 400; 
+            letter-spacing: 0.05em; 
         }
 
         .event-poster-container:hover .poster-overlay {
             opacity: 1;
         }
 
-        /* Updated Font for Exhibition Titles */
         .event-title {
             font-family: var(--font-typewriter); 
             font-size: 1.8rem;
@@ -1420,11 +1335,10 @@
             font-family: var(--font-sans); 
         }
 
-        /* UPDATED: Decreased max-width to 800px from 900px */
         .event-desc {
             font-size: 1rem;
             color: #555;
-            max-width: 800px; /* Reduced from 900px */
+            max-width: 800px; 
             font-weight: 300;
             line-height: 1.7;
             font-family: var(--font-body-serif);
@@ -1485,10 +1399,8 @@
         }
 
         .contact-value {
-            /* Updated: Changed to Gowun Batang (Lyrical Serif) */
             font-family: var(--font-lyrical);
-            /* Updated: Adjusted size and weight for new font */
-            font-size: 1.7rem; /* Slightly reduced */
+            font-size: 1.7rem; 
             font-weight: 400;
             color: var(--text-main);
             text-decoration: none;
@@ -1499,7 +1411,6 @@
             color: var(--accent-color);
         }
 
-        /* Contact Page specific - Allow Select */
         #contact {
             -webkit-user-select: text;
             -moz-user-select: text;
@@ -1507,7 +1418,6 @@
             user-select: text;
         }
 
-        /* Style for Inquiries text to match Nav bar */
         .nav-style-text {
             font-family: var(--font-mono); 
             font-size: 0.9rem; 
@@ -1516,11 +1426,167 @@
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
+
+        /* --- Mobile Responsive Updates (900px) --- */
+        @media (max-width: 900px) {
+            /* 1. Mobile Navigation Fix */
+            nav {
+                height: auto;
+                padding: 10px 0;
+            }
+            .nav-inner {
+                padding: 0 1.5rem;
+                flex-direction: column; /* Stack vertically */
+                gap: 10px;
+            }
+            .brand-container {
+                margin-bottom: 0.5rem;
+                justify-content: center; /* Center logo */
+                width: 100%;
+            }
+            .nav-links {
+                gap: 1.5rem;
+                flex-wrap: wrap; /* Allow links to wrap if needed */
+                justify-content: center; /* Center links */
+            }
+
+            /* 2. About Section Fix */
+            .statement-grid {
+                grid-template-columns: 1fr; /* 1 column layout */
+            }
+            .about-img-container {
+                justify-content: center;
+                padding-top: 0;
+                order: 0; /* Image first */
+            }
+            .about-text {
+                order: 1; /* Text second */
+                margin-top: 1rem;
+            }
+            .about-lead {
+                font-size: 1.25rem; /* Reduced from 1.6rem */
+            }
+
+            /* 3. Artworks Image 3,4,5 Fix (Vertical Stack) */
+            .special-row, .special-row.dynamic-row {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            .special-row .row-img-wrap, .special-row.dynamic-row .row-img-wrap {
+                width: 100% !important;
+                flex: none;
+            }
+            .special-row img, .special-row.dynamic-row img {
+                width: 100%;
+                height: auto;
+            }
+
+            /* 4. Filter Buttons Gap Fix */
+            .filters {
+                gap: 15px; /* Add gap for wrapped items */
+            }
+            .filter-btn:not(:last-child) {
+                border-right: none; /* Remove border on mobile for cleaner look */
+            }
+            .filter-btn {
+                padding: 5px 10px;
+                border-bottom: 1px solid transparent;
+            }
+            .filter-btn.active {
+                 border-bottom: 1px solid var(--accent-color);
+            }
+
+            /* 5. Keep Me Image Fix */
+            .keep-me-wrapper {
+                grid-template-columns: 1fr; 
+                gap: 1.5rem;
+                align-items: start;
+            }
+            .keep-img-large {
+                width: 100%;
+                height: auto;
+                min-height: 200px; /* Ensure visibility */
+                margin-bottom: 2rem;
+                display: block; /* Force block display */
+            }
+            .keep-img-large img {
+                width: 100%;
+                height: auto;
+            }
+            .keep-me-right-grid {
+                grid-template-columns: repeat(2, 1fr); 
+            }
+
+            /* 6. Exhibitions Layout Fix (Poster Text Below) */
+            .event-body {
+                grid-template-columns: 1fr; /* Single column */
+                gap: 1.5rem;
+            }
+            .event-poster-container {
+                width: 100%;
+                max-width: 100%; /* Use full width or keep limited if desired */
+            }
+            .event-poster {
+                width: 100%; /* Ensure full width */
+                max-width: 300px; /* Limit max size if needed, or remove for full width */
+            }
+
+            /* Other Existing Responsive Fixes */
+            nav::after {
+                left: 70px;
+            }
+            .pouch-top-grid {
+                grid-template-columns: repeat(2, 1fr); 
+                gap: 2rem;
+            }
+            .pouch-span-2 {
+                grid-column: 1 / -1; 
+            }
+            .pouch-span-1 {
+                grid-column: span 1;
+            }
+            .pouch-grid-full {
+                gap: 2rem;
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .auto-resizable-row {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            .auto-resizable-row .art-img-wrap {
+                width: 100% !important;
+                height: auto;
+            }
+            .tanha-grid {
+                grid-template-columns: 1fr;
+                height: auto; 
+            }
+            .tanha-col-side, .tanha-col-center {
+                height: auto;
+            }
+            .tanha-col-side img, .tanha-col-center img {
+                height: auto;
+                object-fit: contain;
+            }
+            .tanha-col-center .art-img-wrap {
+                height: auto;
+                max-height: none;
+            }
+            .tanha-col-center {
+                padding: 0;
+            }
+            .text-only-body {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            .hero-caption-box { bottom: 1rem; right: 1rem; font-size: 0.7rem; }
+            .hero-img-container { height: 50vh; }
+        }
     </style>
 </head>
 <body>
 
-    <!-- Lightbox (Fix: Removed 'Full view' alt text) -->
+    <!-- Lightbox (Fix: Reduced Close Button Size) -->
     <div id="lightbox" class="lightbox" onclick="closeLightbox()">
         <span class="lightbox-close">&times;</span>
         <div class="lightbox-content" onclick="event.stopPropagation()">
@@ -1950,7 +2016,6 @@
 
                 <!-- Keep me Series (2025-2023) -->
                 <div class="artwork-item wide show" data-category="hope" data-year="2025-2023" data-subcategory="lucky-pouch">
-                    <!-- Updated: Changed color to muted and weight to light -->
                     <h3 class="series-sub-title">KEEP ME</h3>
                     <div class="keep-me-wrapper">
                        <div class="keep-img-large" onclick="openLightbox('Image/Keep/Keep_1.webp', 'Keep me, 한지에 동양안료, 80.3x40cm, 2025')">
@@ -2525,8 +2590,6 @@
                     // Automatically click the first year button to show its series
                     const firstYearBtn = hopeWrapper.querySelector('.hope-year-group .sub-btn');
                     if(firstYearBtn) {
-                         // Extract the year string or simulate click. 
-                         // Since our updated function uses text content searching, we can pass text.
                          setHopeYear(firstYearBtn.textContent.trim());
                     }
                 }
@@ -2546,7 +2609,6 @@
                 if (matchCategory && matchSubcategory) {
                     item.classList.add('show');
                     if (item.classList.contains('group-header')) {
-                         // Check if hidden by style
                          if(item.style.display !== 'none') {
                              item.style.display = 'block';
                          }
@@ -2555,16 +2617,11 @@
                     }
                 } else {
                     item.classList.remove('show');
-                    if (item.classList.contains('group-header')) {
-                         // Keep display none if it was inline style, otherwise just remove show
-                         // Logic handled by class toggle mostly, but for hidden header we rely on !important
-                    }
                 }
             });
             setTimeout(adjustAllRows, 100);
         }
 
-        // Updated function for the new nested structure
         function setHopeYear(yearStr) {
             // 1. Deactivate all Year buttons
             document.querySelectorAll('.hope-year-group > .sub-btn').forEach(b => b.classList.remove('active'));
@@ -2589,14 +2646,12 @@
                 const seriesGroup = targetGroup.querySelector('.series-group');
                 if (seriesGroup) {
                     seriesGroup.classList.add('visible');
-                    // Click the first button in the series automatically
                     const firstSeriesBtn = seriesGroup.querySelector('.sub-btn');
                     if(firstSeriesBtn) firstSeriesBtn.click();
                 }
             }
         }
 
-        // Updated function for nested structure filtering
         function filterHope(btn, year, series) {
             const parent = btn.closest('.series-group');
             if(parent) {
@@ -2607,9 +2662,6 @@
             document.querySelectorAll('.artwork-item').forEach(item => {
                 if (item.dataset.category !== 'hope') {
                     item.classList.remove('show');
-                    if (item.classList.contains('group-header')) {
-                        // handled by style
-                    }
                     return;
                 }
 
@@ -2631,14 +2683,11 @@
             const content = header.nextElementSibling;
             const icon = header.querySelector('.toggle-icon');
             
-            // Check if it's already expanded
             const isExpanded = content.classList.contains('expanded');
 
-            // Close all other series intros
             document.querySelectorAll('.series-content.expanded').forEach(el => {
                 if (el !== content) {
                     el.classList.remove('expanded');
-                    // Reset icon of sibling
                     const siblingHeader = el.previousElementSibling;
                     if(siblingHeader) {
                         const siblingIcon = siblingHeader.querySelector('.toggle-icon');
@@ -2647,7 +2696,6 @@
                 }
             });
 
-            // Toggle clicked element
             content.classList.toggle('expanded');
             icon.textContent = content.classList.contains('expanded') ? '-' : '+';
         }
@@ -2657,10 +2705,8 @@
             const content = header.nextElementSibling;
             const icon = header.querySelector('.intro-icon');
 
-            // Check if expanded
             const isExpanded = content.classList.contains('open');
 
-            // Close all other open intro texts
             document.querySelectorAll('.intro-text.open').forEach(el => {
                 if (el !== content) {
                     el.classList.remove('open');
@@ -2680,14 +2726,11 @@
             const parent = element.closest('.event-body');
             const gallery = parent.querySelector('.event-gallery');
             if (gallery) {
-                // Optional: Close other galleries if needed, but usually kept separate
                 gallery.classList.toggle('open');
             }
         }
 
-        // --- NEW: Helper to reset all accordions ---
         function resetAccordions() {
-            // Close Series Intros
             document.querySelectorAll('.series-content.expanded').forEach(el => {
                 el.classList.remove('expanded');
                 const header = el.previousElementSibling;
@@ -2697,7 +2740,6 @@
                 }
             });
 
-            // Close Event Intros
             document.querySelectorAll('.intro-text.open').forEach(el => {
                 el.classList.remove('open');
                 const header = el.previousElementSibling;
@@ -2708,15 +2750,12 @@
             });
         }
 
-        // --- NEW: Global Click Listener ---
         document.addEventListener('click', function(e) {
-            // If click target is NOT inside a series-intro or event-desc, close them
             if (!e.target.closest('.series-intro') && !e.target.closest('.event-desc')) {
                 resetAccordions();
             }
         });
 
-        // --- NEW: Disable Right Click on Images ---
         document.addEventListener('contextmenu', function(e) {
             if (e.target.tagName === 'IMG') {
                 e.preventDefault();
