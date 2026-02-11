@@ -1521,14 +1521,14 @@
 
             /* 4. Filter Buttons Gap Fix */
             .filters {
-                gap: 8px; /* Reduced from 15px */
+                gap: 4px; /* Reduced from 8px */
                 margin-bottom: 2rem;
             }
             .filter-btn:not(:last-child) {
                 border-right: none; /* Remove border on mobile for cleaner look */
             }
             .filter-btn {
-                padding: 4px 8px; /* Reduced padding */
+                padding: 4px 6px; /* Reduced padding */
                 border-bottom: 1px solid transparent;
                 font-size: 0.85rem;
             }
@@ -1651,6 +1651,11 @@
 
             /* 3. Artwork Hope Filters Alignment (UPDATED) */
             
+            /* Hope Year Buttons Container - Reduce Gap */
+            .hope-filters-container {
+                gap: 6rem; /* Reduced for mobile (overrides global 8rem) */
+            }
+
             /* Center alignment for both groups */
             .series-group {
                 flex-direction: row; 
