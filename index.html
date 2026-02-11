@@ -1439,8 +1439,9 @@
             }
             .brand-container {
                 margin-bottom: 0.2rem;
-                justify-content: center; /* Center logo */
+                justify-content: flex-start; /* Logo Left Align */
                 width: 100%;
+                padding-left: 0;
             }
             .nav-links {
                 gap: 0.8rem; /* Reduced gap */
@@ -1472,68 +1473,89 @@
                 font-size: 1.25rem; /* Reduced from 1.6rem */
             }
 
-            /* 3. Artworks Image 3,4,5 Fix (Vertical Stack) */
-            .special-row, .special-row.dynamic-row {
+            /* 3. Artworks Image Spacing & Sizing Fixes */
+            /* Uniform Spacing: Override inline styles */
+            .artwork-item, .artwork-item.wide {
+                margin-bottom: 2rem !important; /* Reduced uniform gap (from 3rem to 2rem) */
+                margin-top: 0 !important;
+                padding-bottom: 0;
+            }
+            
+            /* Vertical Stack for grids */
+            .gallery-grid {
+                display: flex;
                 flex-direction: column;
-                gap: 2rem;
+                gap: 2rem; /* Reduced from 3rem */
             }
-            .special-row .row-img-wrap, .special-row.dynamic-row .row-img-wrap {
+
+            /* Fix gap in grouped rows */
+            .special-row, .special-row.dynamic-row, .auto-resizable-row, .tanha-grid, .keep-me-wrapper, .pouch-top-grid, .pouch-grid-full, .keep-me-bottom-row {
+                flex-direction: column;
+                gap: 2rem; /* Uniform reduced gap */
+                margin-bottom: 0;
+            }
+
+            /* Image Containers: ensure full width but center content */
+            .special-row .row-img-wrap, .special-row.dynamic-row .row-img-wrap, .art-img-wrap, .keep-img-large, .tanha-col-side .art-img-wrap, .tanha-col-center .art-img-wrap {
                 width: 100% !important;
+                height: auto !important;
                 flex: none;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 0;
             }
-            .special-row img, .special-row.dynamic-row img {
-                width: 100%;
+
+            /* Image Size: Fit vertically in screen */
+            .special-row img, .special-row.dynamic-row img, .art-img-wrap img, .keep-img-large img, .nested-item img, .tanha-col-side img, .tanha-col-center img, .pouch-top-grid img, .pouch-grid-full img {
+                width: auto;
                 height: auto;
+                max-width: 100%;
+                max-height: 75vh; /* Reduced from 85vh to ensure it fits better */
+                object-fit: contain;
+                margin: 0 auto;
+                display: block;
             }
 
             /* 4. Filter Buttons Gap Fix */
             .filters {
-                gap: 15px; /* Add gap for wrapped items */
+                gap: 8px; /* Reduced from 15px */
+                margin-bottom: 2rem;
             }
             .filter-btn:not(:last-child) {
                 border-right: none; /* Remove border on mobile for cleaner look */
             }
             .filter-btn {
-                padding: 5px 10px;
+                padding: 4px 8px; /* Reduced padding */
                 border-bottom: 1px solid transparent;
+                font-size: 0.85rem;
             }
             .filter-btn.active {
                  border-bottom: 1px solid var(--accent-color);
             }
 
-            /* 5. Keep Me Image Fix */
+            /* 5. Keep Me Specifics */
             .keep-me-wrapper {
-                display: flex; /* Changed from grid to flex column */
+                display: flex; 
                 flex-direction: column;
-                gap: 2rem;
+                gap: 2rem; /* Uniform gap */
             }
             .keep-img-large {
                 width: 100%;
-                height: auto;
                 display: block;
-                margin-bottom: 0; /* Let flex gap handle spacing */
-            }
-            .keep-img-large img {
-                width: 100%;
-                height: auto;
-                object-fit: contain;
-                display: block;
+                margin-bottom: 0; 
             }
             .keep-me-right-grid {
                 display: grid;
                 grid-template-columns: repeat(2, 1fr);
                 gap: 15px;
                 width: 100%;
-                height: auto; /* Ensure height shows */
+                height: auto; 
             }
             .keep-me-right-grid .nested-item {
                 height: auto;
                 display: block;
                 width: 100%;
-            }
-            .keep-me-right-grid img {
-                width: 100%;
-                height: auto;
             }
 
             /* 6. Exhibitions Layout Fix (Poster Text Below) */
@@ -1550,15 +1572,16 @@
                 max-width: 300px; /* Limit max size if needed, or remove for full width */
             }
 
-            /* 7. Home Image Mobile Zoom */
+            /* 7. Home Image Mobile Fix */
             .hero-img-container {
-                height: 70vh; /* Increase container height */
+                height: 65vh; /* Slightly increased to make image bigger */
+                width: 100%;
                 overflow: hidden;
             }
             .hero-img {
                 width: 100%;
                 height: 100%;
-                object-fit: cover; /* Fill the container, zooming/cropping */
+                object-fit: cover; /* CHANGED: Cover fills the box (zooms in), so wide images look bigger. Vertical is not cut (just fills). */
                 object-position: center;
             }
 
@@ -1568,7 +1591,7 @@
             }
             .pouch-top-grid {
                 grid-template-columns: repeat(2, 1fr); 
-                gap: 2rem;
+                margin-bottom: 2rem;
             }
             .pouch-span-2 {
                 grid-column: 1 / -1; 
@@ -1577,31 +1600,16 @@
                 grid-column: span 1;
             }
             .pouch-grid-full {
-                gap: 2rem;
                 grid-template-columns: repeat(2, 1fr);
             }
-            .auto-resizable-row {
-                flex-direction: column;
-                gap: 2rem;
-            }
-            .auto-resizable-row .art-img-wrap {
-                width: 100% !important;
-                height: auto;
-            }
+            
             .tanha-grid {
                 grid-template-columns: 1fr;
                 height: auto; 
             }
             .tanha-col-side, .tanha-col-center {
                 height: auto;
-            }
-            .tanha-col-side img, .tanha-col-center img {
-                height: auto;
-                object-fit: contain;
-            }
-            .tanha-col-center .art-img-wrap {
-                height: auto;
-                max-height: none;
+                gap: 2rem; /* Uniform gap */
             }
             .tanha-col-center {
                 padding: 0;
@@ -1611,6 +1619,17 @@
                 gap: 1rem;
             }
             .hero-caption-box { bottom: 1rem; right: 1rem; font-size: 0.7rem; }
+
+            /* Additions for Title Sizing */
+            .page-title {
+                font-size: 2.2rem;
+            }
+            .series-title {
+                font-size: 0.9rem !important;
+            }
+            .series-header {
+                padding: 0.5rem 0.5rem;
+            }
         }
     </style>
 </head>
