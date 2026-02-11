@@ -6,9 +6,7 @@
     <title>Ryu Minjeong | Modern Organic Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Fonts: Added 'Teko' as requested -->
     <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=DM+Serif+Display&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&family=Noto+Serif+KR:wght@300;400;500;600&family=Nanum+Pen+Script&family=Gowun+Batang:wght@400;700&family=Gowun+Dodum&family=Song+Myung&family=Marcellus&family=Orbitron:wght@400;500;700&family=Teko:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -1441,7 +1439,7 @@
             }
             .brand-container {
                 margin-bottom: 0.5rem;
-                justify-content: center; /* Center logo */
+                justify-content: flex-start; /* FIX: Changed from center to flex-start */
                 width: 100%;
             }
             .nav-links {
@@ -1502,18 +1500,23 @@
                 gap: 1.5rem;
                 align-items: start;
             }
+            /* FIX: Updated Keep Image Styles for Visibility */
             .keep-img-large {
+                grid-column: 1 / -1; /* Reset column span */
+                grid-row: auto;      /* Reset row */
                 width: 100%;
-                height: auto;
-                min-height: 200px; /* Ensure visibility */
+                height: auto;        /* Allow auto height */
                 margin-bottom: 2rem;
-                display: block; /* Force block display */
+                display: block;      /* Ensure block display */
             }
             .keep-img-large img {
                 width: 100%;
                 height: auto;
+                display: block;      /* Force block for image */
             }
             .keep-me-right-grid {
+                grid-column: 1 / -1; /* Reset column span to stack below */
+                grid-row: auto;      /* Reset row */
                 grid-template-columns: repeat(2, 1fr); 
             }
 
@@ -1586,7 +1589,6 @@
 </head>
 <body>
 
-    <!-- Lightbox (Fix: Reduced Close Button Size) -->
     <div id="lightbox" class="lightbox" onclick="closeLightbox()">
         <span class="lightbox-close">&times;</span>
         <div class="lightbox-content" onclick="event.stopPropagation()">
@@ -1595,7 +1597,6 @@
         </div>
     </div>
 
-    <!-- Top Navigation -->
     <nav>
         <div class="nav-inner">
             <div class="brand-container">
@@ -1625,10 +1626,8 @@
         </div>
     </nav>
 
-    <!-- Main Content -->
     <main>
         
-        <!-- HOME -->
         <div id="home" class="tab-content active">
             <div class="hero-wrap">
                 <div class="hero-img-container" id="hero-img-container">
@@ -1644,7 +1643,6 @@
             </div>
         </div>
 
-        <!-- ABOUT -->
         <div id="about" class="tab-content">
             <header class="page-header">
                 <span class="page-subtitle">Statement & Biography</span>
@@ -1689,7 +1687,6 @@
                 </div>
             </section>
 
-            <!-- Biography & CV -->
             <section class="about-section" id="biography">
                 <span class="section-label">Biography</span>
                 <div class="bio-list">
@@ -1709,9 +1706,7 @@
                     </div>
                 </div>
 
-                <!-- CV SECTION -->
                 <div class="cv-wrapper">
-                    <!-- Solo Exhibitions -->
                     <div class="cv-category">
                         <h4 class="cv-category-title">Solo Exhibitions</h4>
                         <div class="cv-item"><span class="cv-year">2025</span><span class="cv-desc">책에 바침, 충북갤러리(인사아트센터), 서울</span></div>
@@ -1723,7 +1718,6 @@
                         <div class="cv-item"><span class="cv-year">2017</span><span class="cv-desc">NCC Gallery 동행 초대 '옛그림전', NCC Gallery 동행, 일산</span></div>
                     </div>
 
-                    <!-- Group Exhibitions -->
                     <div class="cv-category">
                         <h4 class="cv-category-title">Selected Group Exhibitions</h4>
                          <div class="cv-item"><span class="cv-year">2025</span><span class="cv-desc">민화 오늘의 이야기, 김세중미술관, 서울</span></div>
@@ -1749,7 +1743,6 @@
                         <div class="cv-item"><span class="cv-year">2019</span><span class="cv-desc">책거리 Today, 인당뮤지엄, 대구</span></div>
                     </div>
 
-                    <!-- Artfair -->
                     <div class="cv-category">
                         <h4 class="cv-category-title">Artfair</h4>
                         <div class="cv-item"><span class="cv-year">2024</span><span class="cv-desc">뱅크아트페어, 무우수갤러리, Pan Pacific Singapore Hotel, Singapore</span></div>
@@ -1757,7 +1750,6 @@
                         <div class="cv-item"><span class="cv-year">2022</span><span class="cv-desc">제4회 대한민국민화아트페어 초대 포토부스 'The Shape of Hope', SETEC, 서울</span></div>
                     </div>
 
-                    <!-- Project -->
                     <div class="cv-category">
                         <h4 class="cv-category-title">Project</h4>
                         <div class="cv-item"><span class="cv-year">2024</span><span class="cv-desc">제천문화재단 올해의 작가전 작가 선정</span></div>
@@ -1768,7 +1760,6 @@
                          <div class="cv-item"><span class="cv-year">2020</span><span class="cv-desc">밀양 문화재 야행 홍보 콘텐츠 작화</span></div>
                     </div>
 
-                    <!-- Awards & Residency & Book -->
                     <div class="cv-category">
                         <h4 class="cv-category-title">Award (Grant & Prize)</h4>
                         <div class="cv-item"><span class="cv-year">2024</span><span class="cv-desc">곽재선 문화재단 미르아트공모전 할리스특별상</span></div>
@@ -1786,7 +1777,6 @@
                         <div class="cv-item"><span class="cv-year">2024</span><span class="cv-desc">그림책 '모든 순간, 너였어' 출간</span></div>
                     </div>
                     
-                    <!-- Possession -->
                     <div class="cv-category">
                          <h4 class="cv-category-title">Collections</h4>
                          <div class="cv-item"><span class="cv-year">2022</span><span class="cv-desc">Sammlung Pohl (Museum), Marburg</span></div>
@@ -1796,7 +1786,6 @@
             </section>
         </div>
 
-        <!-- ARTWORKS -->
         <div id="artworks" class="tab-content">
             <header class="page-header">
                 <span class="page-subtitle">Selected Works</span>
@@ -1808,7 +1797,6 @@
                 <button class="filter-btn" data-cat="hope" onclick="setCategory('hope')">The Shape of Hope</button>
             </div>
 
-            <!-- Series Statement: The Book -->
             <div id="intro-the-book" class="series-intro visible">
                 <div class="series-header" onclick="toggleDesc(this)">
                     <span class="series-title" style="font-family: var(--font-typewriter);">모든 책은 빛이 되어 시간을 건너간다</span>
@@ -1826,7 +1814,6 @@
                 </div>
             </div>
 
-            <!-- Series Statement: The Shape of Hope -->
             <div id="intro-hope" class="series-intro">
                 <div class="series-header" onclick="toggleDesc(this)">
                     <span class="series-title" style="font-family: var(--font-typewriter);">시대착오적 부적. 인간의 욕망과 화합을 조명하며 삶을 응원하다</span>
@@ -1854,15 +1841,12 @@
                 </div>
             </div>
 
-            <!-- Sub Filters for THE BOOK -->
             <div id="sub-the-book" class="sub-filters visible">
                 <button class="sub-btn active" onclick="filterGallery(this, '2025-2023')">2025-2023</button>
                 <button class="sub-btn" onclick="filterGallery(this, '2022-2020')">2022-2020</button>
             </div>
 
-            <!-- Sub Filters for THE SHAPE OF HOPE (New Structure) -->
             <div id="hope-filters-wrapper" class="hope-filters-container">
-                <!-- Group 2025-2023 -->
                 <div class="hope-year-group">
                     <button class="sub-btn" onclick="setHopeYear('2025-2023')">2025-2023</button>
                     <div id="series-2025" class="series-group">
@@ -1871,7 +1855,6 @@
                     </div>
                 </div>
 
-                <!-- Group 2022-2020 -->
                 <div class="hope-year-group">
                     <button class="sub-btn" onclick="setHopeYear('2022-2020')">2022-2020</button>
                     <div id="series-2022" class="series-group">
@@ -1882,21 +1865,17 @@
             </div>
 
             <div class="gallery-grid" id="gallery-grid">
-                <!-- ================= THE BOOK ================= -->
-                <!-- 1. Beyond 1 (Wide) -->
                 <div class="artwork-item wide show" data-category="the-book" data-subcategory="2025-2023" onclick="openLightbox('Image/Image/Image_1.webp', 'Beyond, 한지에 동양안료, 디지털 프린팅, 140x70cmx4, 2025')" style="margin-bottom: 3rem;">
                     <div class="art-img-wrap">
                         <img src="Image/Image/Image_1.webp" alt="Beyond">
                     </div>
                 </div>
-                <!-- 2. Beyond 2 (Wide) -->
                 <div class="artwork-item wide show" data-category="the-book" data-subcategory="2025-2023" onclick="openLightbox('Image/Image/Image_2.webp', 'Beyond, 한지에 동양안료, 140x50cmx8, 2025')" style="margin-bottom: 6rem;">
                     <div class="art-img-wrap">
                         <img src="Image/Image/Image_2.webp" alt="Beyond">
                     </div>
                 </div>
 
-                <!-- ADDED ITEMS: Image_3, Image_4, Image_5 (Dynamic Row Layout) -->
                 <div class="artwork-item wide show" data-category="the-book" data-subcategory="2025-2023">
                     <div class="special-row dynamic-row" id="row-3-4-5">
                         <div class="row-img-wrap" onclick="openLightbox('Image/Image/Image_3.webp', 'Beyond, 한지에 동양안료, 140x70cmx2, 2025')">
@@ -1911,24 +1890,19 @@
                     </div>
                 </div>
 
-                <!-- Image 7 and Image 6 Row -->
                 <div class="artwork-item wide show" data-category="the-book" data-subcategory="2025-2023" style="margin-bottom: 6rem; margin-top: 4rem;">
                     <div class="auto-resizable-row">
-                        <!-- Image 7 -->
                         <div class="art-img-wrap" onclick="openLightbox('Image/Image/Image_7_1.webp', '전설의 바람, 원단에 디지털 프린팅, 가변크기, 2025')">
                             <img src="Image/Image/Image_7.webp" alt="전설의 바람">
                         </div>
-                        <!-- Image 6 -->
                         <div class="art-img-wrap" onclick="openLightbox('Image/Image/Image_6.webp', '책의 길, 한지에 동양안료, 140x65cmx3, 2024')">
                             <img src="Image/Image/Image_6.webp" alt="책의 길">
                         </div>
                     </div>
                 </div>
 
-                <!-- Group Heading (Hidden as requested) -->
                 <h3 class="group-header artwork-item" data-category="the-book" data-subcategory="2025-2023-hidden" style="display: none;">세상의 모든 책</h3>
 
-                <!-- Book 1-9 (Standard Grid) -->
                 <div class="artwork-item" data-category="the-book" data-subcategory="2025-2023-hidden" onclick="openLightbox('Image/Book/Book_1.webp', '나의 나니아, 한지에 동양안료, 50x94cm, 2025')">
                     <div class="art-img-wrap"><img src="Image/Book/Book_1.webp" alt="나의 나니아"></div>
                 </div>
@@ -1957,7 +1931,6 @@
                     <div class="art-img-wrap"><img src="Image/Book/Book_9.webp" alt="The Impossible Dream"></div>
                 </div>
 
-                <!-- 2022-2020 Items -->
                 <div class="artwork-item wide" data-category="the-book" data-subcategory="2022-2020" onclick="openLightbox('Image/Book/Book_11.webp', 'Bouquinistes de Paris, 한지에 동양안료, 69x35cm, 69x100.5cm, 69x35cm, 2021')">
                     <div class="art-img-wrap"><img src="Image/Book/Book_11.webp" alt="Bouquinistes de Paris"></div>
                 </div>
@@ -1968,9 +1941,6 @@
                     <div class="art-img-wrap"><img src="Image/Book/Book_13.webp" alt="전설의 바람2.1_서가이야기"></div>
                 </div>
 
-                <!-- ================= THE SHAPE OF HOPE (2025-2023) ================= -->
-                
-                <!-- Lucky Pouch: 2025-2023 -->
                 <div class="artwork-item wide show" data-category="hope" data-year="2025-2023" data-subcategory="lucky-pouch">
                     <div class="auto-resizable-row">
                         <div class="art-img-wrap" onclick="openLightbox('Image/Lalala/Lalala_1.webp', 'Lalala, 한지에 동양안료, 80.3x116.8cm, 2025')">
@@ -2014,7 +1984,6 @@
                     </div>
                 </div>
 
-                <!-- Keep me Series (2025-2023) -->
                 <div class="artwork-item wide show" data-category="hope" data-year="2025-2023" data-subcategory="lucky-pouch">
                     <h3 class="series-sub-title">KEEP ME</h3>
                     <div class="keep-me-wrapper">
@@ -2033,7 +2002,6 @@
                            <div class="nested-item" onclick="openLightbox('Image/Keep/Keep_10.webp', 'Keep me, 한지에 동양안료, 30x25cm, 2025')"><img src="Image/Keep/Keep_10.webp" alt="Keep me 8"></div>
                        </div>
                        
-                       <!-- New Row for Keep 2 and 11 -->
                        <div class="keep-me-bottom-row auto-resizable-row">
                            <div class="art-img-wrap" onclick="openLightbox('Image/Keep/Keep_2.webp', 'Keep me;Dragon Magic, 한지에 동양안료, 80x66cm, 2023')">
                                <img src="Image/Keep/Keep_2.webp" alt="Keep me 2">
@@ -2045,21 +2013,18 @@
                     </div>
                 </div>
 
-                <!-- Tanha Series: 2025-2023 -->
                 <div class="artwork-item wide" data-category="hope" data-year="2025-2023" data-subcategory="tanha" onclick="openLightbox('Image/Tanha/Tanha_1.webp', 'Tanha, 한지에 동양안료, 150x50cmx4, 2024')">
                     <div class="art-img-wrap"><img src="Image/Tanha/Tanha_1.webp" alt="Tanha 1"></div>
                 </div>
                 
                 <div class="artwork-item wide" data-category="hope" data-year="2025-2023" data-subcategory="tanha">
                     <div class="tanha-grid">
-                        <!-- Left Column: Tanha 4 -->
                         <div class="tanha-col-side">
                             <div class="art-img-wrap" onclick="openLightbox('Image/Tanha/Tanha_4.webp', 'Tanha; Lift me up, 한지에 동양안료, 140x70cm, 2024')">
                                 <img src="Image/Tanha/Tanha_4.webp" alt="Tanha 4">
                             </div>
                         </div>
                         
-                        <!-- Center Column: Tanha 3 & Tanha 2 -->
                         <div class="tanha-col-center">
                             <div class="art-img-wrap" onclick="openLightbox('Image/Tanha/Tanha_3.webp', 'Tanha, 한지에 동양안료, 70x50cm, 2024')">
                                 <img src="Image/Tanha/Tanha_3.webp" alt="Tanha 3">
@@ -2069,7 +2034,6 @@
                             </div>
                         </div>
 
-                        <!-- Right Column: Tanha 5 -->
                         <div class="tanha-col-side">
                             <div class="art-img-wrap" onclick="openLightbox('Image/Tanha/Tanha_5.webp', 'With the moon, 한지에 동양안료, 140x70cm, 2024')">
                                 <img src="Image/Tanha/Tanha_5.webp" alt="With the moon">
@@ -2078,7 +2042,6 @@
                     </div>
                 </div>
 
-                <!-- ADDED: Tanha 6 & 7 Row -->
                 <div class="artwork-item wide" data-category="hope" data-year="2025-2023" data-subcategory="tanha">
                     <div class="auto-resizable-row">
                         <div class="art-img-wrap" onclick="openLightbox('Image/Tanha/Tanha_6.webp', 'Tanha, 2024')">
@@ -2090,11 +2053,7 @@
                     </div>
                 </div>
 
-                <!-- ================= THE SHAPE OF HOPE (2022-2020) ================= -->
-                
-                <!-- Lucky Pouch: 2022-2020 -->
                 <div class="artwork-item wide show" data-category="hope" data-year="2022-2020" data-subcategory="lucky-pouch">
-                    <!-- Top Section: Grid Based (2022) -->
                     <div class="pouch-top-grid">
                         <div class="pouch-span-2" onclick="openLightbox('Image/pouch/pouch_1.webp', '복드림주머니, 한지에 동양안료, 73x91cm, 2024-2022')">
                             <img src="Image/pouch/pouch_1.webp" alt="복드림주머니">
@@ -2107,7 +2066,6 @@
                         </div>
                     </div>
 
-                    <!-- Bottom Grid Section (2022/2021 + Pouch 10/11 Moved) -->
                     <div class="pouch-grid-full">
                         <div class="nested-item" onclick="openLightbox('Image/pouch/pouch_4.webp', '충만, 한지에 동양안료, 27x27cm, 2022')"><img src="Image/pouch/pouch_4.webp" alt="충만"></div>
                         <div class="nested-item" onclick="openLightbox('Image/pouch/pouch_5.webp', 'Dragon Magic, 한지에 동양안료, 27x27cm, 2022')"><img src="Image/pouch/pouch_5.webp" alt="Dragon Magic"></div>
@@ -2120,7 +2078,6 @@
                     </div>
                 </div>
 
-                <!-- Wishful Pathway (2022-2020) -->
                 <div class="artwork-item wide" data-category="hope" data-year="2022-2020" data-subcategory="wishful" onclick="openLightbox('Image/Hope/hope_1.webp', '아낌없이, 한지에 동양안료, 160x50cmx8, 2020')">
                     <div class="art-img-wrap"><img src="Image/Hope/hope_1.webp" alt="아낌없이"></div>
                 </div>
@@ -2131,7 +2088,6 @@
                     <div class="art-img-wrap"><img src="Image/Hope/hope_3.webp" alt="With"></div>
                 </div>
 
-                <!-- ADDED: Hope 4 & 5 -->
                 <div class="artwork-item wide" data-category="hope" data-year="2022-2020" data-subcategory="wishful">
                     <div class="auto-resizable-row">
                         <div class="art-img-wrap" onclick="openLightbox('Image/Hope/hope_4.webp', 'The Shape of Hope, 원단에 디지털 프린팅, 가변크기, 2022.')">
@@ -2145,7 +2101,6 @@
             </div>
         </div>
 
-        <!-- EXHIBITIONS -->
         <div id="exhibitions" class="tab-content">
              <header class="page-header">
                 <span class="page-subtitle">Selected Exhibitions</span>
@@ -2153,7 +2108,6 @@
             </header>
             <div class="timeline">
                 
-                <!-- 2025 -->
                 <div class="event">
                     <span class="event-year">2025</span>
                     <div class="event-body">
@@ -2171,7 +2125,6 @@
                             </div>
                             <a href="https://www.cbartgallery.com/cbart/selectExbiWebView.do?exbiNo=109&key=792&pageUnit=10&pageIndex=2&searchCnd=all&fcltyNo=12&searchExbiSttus=CLOS" target="_blank" class="event-link">Exhibition Detail View</a>
                             <div class="event-desc">
-                                <!-- Introduction Toggle -->
                                 <div class="intro-toggle" onclick="toggleEventIntro(this)">
                                     Statement <span class="intro-icon">+</span>
                                 </div>
@@ -2211,11 +2164,9 @@
                     </div>
                 </div>
                 
-                <!-- 2024 -->
                 <div class="event">
                     <span class="event-year">2024</span>
                     
-                    <!-- Solo 1 -->
                     <div class="event-body" style="margin-bottom: 4rem;">
                         <div class="event-poster-container" onclick="toggleGallery(this)">
                             <img src="Image/Poster/poster_2.webp" alt="We The Rhythm Poster" class="event-poster">
@@ -2263,7 +2214,6 @@
                         </div>
                     </div>
 
-                    <!-- Solo 2 (Italy) -->
                     <div class="event-body">
                         <div class="event-poster-container" onclick="toggleGallery(this)">
                             <img src="Image/Poster/poster_3.webp" alt="Shape of Hope Italy Poster" class="event-poster">
@@ -2293,7 +2243,6 @@
                         </div>
                     </div>
 
-                    <!-- Group Exhibitions List -->
                     <div class="group-ex-list">
                         <span class="group-ex-title">Group Exhibitions</span>
                         <span class="group-item">Again Minhwa, Gallery Ilbaeckheon Italy, Pietrasanta</span>
@@ -2307,7 +2256,6 @@
                     </div>
                 </div>
 
-                <!-- 2023 (Group Only) -->
                 <div class="event">
                     <span class="event-year">2023</span>
                     <div class="group-ex-list" style="border-top: none; padding-top: 0; margin-top: 0;">
@@ -2320,7 +2268,6 @@
                     </div>
                 </div>
 
-                <!-- 2022 -->
                 <div class="event">
                     <span class="event-year">2022</span>
                     <div class="event-body">
@@ -2344,14 +2291,12 @@
                             <img src="Image/Gallery/gallery_4.webp" class="ex-view-img" onclick="openLightbox(this.src)">
                         </div>
                     </div>
-                    <!-- Group List -->
                     <div class="group-ex-list">
                         <span class="group-ex-title">Group Exhibitions</span>
                         <span class="group-item">Chaekgeori: Our shelves Our selves, Welt museum Wien, Wien (2022-2023)</span>
                     </div>
                 </div>
 
-                <!-- 2021 (Group Only) -->
                 <div class="event">
                     <span class="event-year">2021</span>
                     <div class="group-ex-list" style="border-top: none; padding-top: 0; margin-top: 0;">
@@ -2364,11 +2309,9 @@
                     </div>
                 </div>
 
-                <!-- 2020 -->
                 <div class="event">
                     <span class="event-year">2020</span>
                     
-                    <!-- Solo 1 -->
                     <div class="event-body" style="margin-bottom: 4rem;">
                         <div class="event-poster-container" onclick="toggleGallery(this)">
                             <img src="Image/Poster/poster_5.webp" alt="전설의 바람 Poster" class="event-poster">
@@ -2391,7 +2334,6 @@
                         </div>
                     </div>
 
-                    <!-- Solo 2 -->
                     <div class="event-body">
                         <div class="event-poster-container" style="cursor: default;">
                             <img src="Image/Poster/poster_6.webp" alt="Paris Exhibition Poster" class="event-poster">
@@ -2413,7 +2355,6 @@
                         </div>
                     </div>
 
-                    <!-- Group List -->
                     <div class="group-ex-list">
                         <span class="group-ex-title">Group Exhibitions</span>
                         <span class="group-item">현대민화공모전 수상자 초대전 대갈화사전, 가회민화박물관, 서울</span>
@@ -2421,7 +2362,6 @@
                     </div>
                 </div>
 
-                <!-- 2019 (Group Only) -->
                 <div class="event">
                     <span class="event-year">2019</span>
                     <div class="group-ex-list" style="border-top: none; padding-top: 0; margin-top: 0;">
@@ -2431,7 +2371,6 @@
                     </div>
                 </div>
 
-                 <!-- 2017 -->
                  <div class="event">
                     <span class="event-year">2017</span>
                     <div class="event-body">
@@ -2458,7 +2397,6 @@
             </div>
         </div>
 
-        <!-- CONTACT -->
         <div id="contact" class="tab-content">
             <header class="page-header">
                 <span class="page-subtitle">Get in Touch</span>
@@ -2468,7 +2406,6 @@
             <div class="contact-wrap">
                 <p style="font-size:1.1rem; color:#555; margin-bottom:2rem;">
                     <span style="font-family: var(--font-sans); font-weight: 400;">전시·협업 문의</span>
-                    <!-- Applied Nav Style -->
                     <span class="nav-style-text">| Inquiries for Exhibitions & Collaborations</span>
                 </p>
                 <div class="contact-row">
@@ -2482,7 +2419,6 @@
             </div>
         </div>
 
-        <!-- Footer -->
         <footer class="site-footer">
             <p>&copy; 2026 Ryu Minjeong. All Rights Reserved.</p>
         </footer>
