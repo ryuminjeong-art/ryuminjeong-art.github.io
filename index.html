@@ -1433,19 +1433,26 @@
                 padding: 10px 0;
             }
             .nav-inner {
-                padding: 0 1.5rem;
+                padding: 0 1rem;
                 flex-direction: column; /* Stack vertically */
-                gap: 10px;
+                gap: 5px; /* Tighten gap */
             }
             .brand-container {
-                margin-bottom: 0.5rem;
-                justify-content: flex-start; /* FIX: Changed from center to flex-start */
+                margin-bottom: 0.2rem;
+                justify-content: center; /* Center logo */
                 width: 100%;
             }
             .nav-links {
-                gap: 1.5rem;
-                flex-wrap: wrap; /* Allow links to wrap if needed */
+                gap: 0.8rem; /* Reduced gap */
+                flex-wrap: nowrap; /* Force single line */
                 justify-content: center; /* Center links */
+                width: 100%;
+                overflow-x: auto; /* Safety for very small screens */
+                padding-bottom: 5px;
+            }
+            .nav-link {
+                font-size: 0.75rem; /* Reduced from 0.9rem to fit */
+                white-space: nowrap;
             }
 
             /* 2. About Section Fix */
@@ -1496,28 +1503,37 @@
 
             /* 5. Keep Me Image Fix */
             .keep-me-wrapper {
-                grid-template-columns: 1fr; 
-                gap: 1.5rem;
-                align-items: start;
+                display: flex; /* Changed from grid to flex column */
+                flex-direction: column;
+                gap: 2rem;
             }
-            /* FIX: Updated Keep Image Styles for Visibility */
             .keep-img-large {
-                grid-column: 1 / -1; /* Reset column span */
-                grid-row: auto;      /* Reset row */
                 width: 100%;
-                height: auto;        /* Allow auto height */
-                margin-bottom: 2rem;
-                display: block;      /* Ensure block display */
+                height: auto;
+                display: block;
+                margin-bottom: 0; /* Let flex gap handle spacing */
             }
             .keep-img-large img {
                 width: 100%;
                 height: auto;
-                display: block;      /* Force block for image */
+                object-fit: contain;
+                display: block;
             }
             .keep-me-right-grid {
-                grid-column: 1 / -1; /* Reset column span to stack below */
-                grid-row: auto;      /* Reset row */
-                grid-template-columns: repeat(2, 1fr); 
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+                width: 100%;
+                height: auto; /* Ensure height shows */
+            }
+            .keep-me-right-grid .nested-item {
+                height: auto;
+                display: block;
+                width: 100%;
+            }
+            .keep-me-right-grid img {
+                width: 100%;
+                height: auto;
             }
 
             /* 6. Exhibitions Layout Fix (Poster Text Below) */
@@ -1532,6 +1548,18 @@
             .event-poster {
                 width: 100%; /* Ensure full width */
                 max-width: 300px; /* Limit max size if needed, or remove for full width */
+            }
+
+            /* 7. Home Image Mobile Zoom */
+            .hero-img-container {
+                height: 70vh; /* Increase container height */
+                overflow: hidden;
+            }
+            .hero-img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover; /* Fill the container, zooming/cropping */
+                object-position: center;
             }
 
             /* Other Existing Responsive Fixes */
@@ -1583,7 +1611,6 @@
                 gap: 1rem;
             }
             .hero-caption-box { bottom: 1rem; right: 1rem; font-size: 0.7rem; }
-            .hero-img-container { height: 50vh; }
         }
     </style>
 </head>
@@ -2044,10 +2071,10 @@
 
                 <div class="artwork-item wide" data-category="hope" data-year="2025-2023" data-subcategory="tanha">
                     <div class="auto-resizable-row">
-                        <div class="art-img-wrap" onclick="openLightbox('Image/Tanha/Tanha_6.webp', 'Tanha, 2024')">
+                        <div class="art-img-wrap" onclick="openLightbox('Image/Tanha/Tanha_6.webp', 'Tanha, 한지에 동양안료,115x61, 85x80, 91x95, 110x100, 121x55cm, 2024')">
                             <img src="Image/Tanha/Tanha_6.webp" alt="Tanha 6">
                         </div>
-                        <div class="art-img-wrap" onclick="openLightbox('Image/Tanha/Tanha_7.webp', 'Tanha, 2024')">
+                        <div class="art-img-wrap" onclick="openLightbox('Image/Tanha/Tanha_7.webp', 'Tanha, 한지에 동양안료,115x61, 85x80, 91x95, 110x100, 121x55cm, 2024')">
                             <img src="Image/Tanha/Tanha_7.webp" alt="Tanha 7">
                         </div>
                     </div>
